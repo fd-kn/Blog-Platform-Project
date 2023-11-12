@@ -1,4 +1,4 @@
-import { collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "./firebaseconfig";
 import { Link } from "react-router-dom";
@@ -19,7 +19,6 @@ const OwnBlogs = () => {
 
     useEffect(() => {
         if(userID !== ''){
-            // ! ADD DATE TO DATABASE
         const fetchData = async () => {
           try {
             const queryRef = query(collection(db, 'allBlogs'), where('id', "==", userID));
@@ -71,7 +70,7 @@ const OwnBlogs = () => {
                 {allblogs.map((blog, index) => (
                     <div key={index} onClick={()=>handlePostClick(blog.blogID)} className="m-5 p-5 border-2 solid border-gray-300 rounded-lg 
                     hover:scale-110 duration-300">
-                        <Link to={'/blogtemplate'}>
+                        <Link to={`/blogtemplate/${'False'}`}>
                             <h1 className="text-3xl pb-4">{blog.title}</h1>
                             <p>Written by: <b>{blog.author}</b></p>
                             <p>Date Added: <b>{blog.date}</b></p>
