@@ -30,8 +30,11 @@ const CreatePost = () => {
         const year = now.getFullYear();
         const hours = now.getHours();
         const minutes = now.getMinutes();
+        const seconds = now.getSeconds()
+        const ms = now.getMilliseconds()
+
         const fDate = `${day}/${month}/${year}`;
-        const fTime = `${hours}:${minutes}`;
+        const fTime = `${hours}:${minutes}:${seconds}:${ms}`;
 
         try {
             const docRef = doc(db, "users", userID);

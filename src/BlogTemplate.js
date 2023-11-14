@@ -1,17 +1,18 @@
 import { collection, deleteDoc, doc, getDoc, getDocs, query, setDoc, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "./firebaseconfig";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-const BlogTemplate = () => {
+const BlogTemplate = ({isPublic}) => {
 
 
-    const { isPublic } = useParams(); 
     const [blogpost, setBlogpost] = useState()
+
 
     var blogID;
     if(JSON.parse(localStorage.getItem('blogID'))){
         blogID = JSON.parse(localStorage.getItem('blogID'));
+        console.log(isPublic)
     } else{
         blogID = '';
     }
@@ -60,7 +61,11 @@ const BlogTemplate = () => {
 
 
       const deleteBlog = async (blogID) => {
-        await deleteDoc(doc(db, "blogpost", blogID));
+        await deleteDoc(doc(db, "allBlogs", blogID));
+        await deleteDoc(doc(db, "publicBlogs", blogID));
+        
+        window.location.replace('/ownblogs')
+
       }
 
       const publishBlog = async () => {
@@ -107,7 +112,7 @@ const BlogTemplate = () => {
                     hover:scale-110 duration-300" onClick={publishBlog}>Publish</button>
             <button className="py-2 px-5 m-2 text-l
                     border-2 border-black rounded-xl hover:bg-slate-300 
-                    hover:scale-110 duration-300" onClick={()=>deleteBlog(blogID)}><Link to={'/ownblogs'}>Delete</Link></button>
+                    hover:scale-110 duration-300" onClick={()=>deleteBlog(blogID)}>Delete</button>
             </div>
                   : null
             }

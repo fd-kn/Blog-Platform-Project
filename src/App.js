@@ -34,8 +34,8 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<LogIn />} />
           <Route path="/ownblogs" element={<OwnBlogs />} />
-          <Route path="/blogtemplate/True" element={<BlogTemplate />} />
-          <Route path="/blogtemplate/False" element={<BlogTemplate />} />
+          <Route path="/blogtemplate/True" element={<BlogTemplate isPublic={'True'} />} />
+          <Route path="/blogtemplate/False" element={<BlogTemplate isPublic={'False'}/>} />
 
 
           <Route path="*" element={<NoPage />} />

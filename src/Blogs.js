@@ -71,7 +71,7 @@ const Blogs = () => {
                 {allblogs.map((blog, index) => (
                     <div key={index}  className="m-5 p-5 border-2 solid border-gray-300 rounded-lg 
                     hover:scale-110 duration-300">
-                        <Link to={`/blogtemplate/${'True'}`}>
+                        <Link to={`/blogtemplate/${'False'}`}>
                             <h1 className="text-3xl pb-4">{blog.title}</h1>
                             <p>Written by: <b>{blog.author}</b></p>
                             <p>Date Added: <b>{blog.date}</b></p>

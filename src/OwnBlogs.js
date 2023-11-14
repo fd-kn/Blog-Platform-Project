@@ -40,10 +40,21 @@ const OwnBlogs = () => {
 
 
                     newBlogs.sort((a, b) => {
-                        const dateTimeA = new Date(`${a.date} ${a.time}`);
-                        const dateTimeB = new Date(`${b.date} ${b.time}`);
-                        return dateTimeB - dateTimeA;
-                      });
+                      console.log(a.date)
+                      console.log(a.time)
+                      const [dayA, monthA, yearA] = a.date.split('/');
+                      const [hourA, minuteA, secondA, msA] = a.time.split(':');
+                    
+                      const [dayB, monthB, yearB] = b.date.split('/');
+                      const [hourB, minuteB, secondB, msB] = b.time.split(':');
+
+                    
+                      const dateTimeA = new Date(yearA, monthA - 1, dayA, hourA, minuteA, secondA);
+                      const dateTimeB = new Date(yearB, monthB - 1, dayB, hourB, minuteB, secondB);
+
+                       console.log(dateTimeA)
+                      return dateTimeB - dateTimeA;
+                    });
             
                       setAllblogs(newBlogs);
                       console.log(newBlogs);
@@ -70,7 +81,7 @@ const OwnBlogs = () => {
                 {allblogs.map((blog, index) => (
                     <div key={index} onClick={()=>handlePostClick(blog.blogID)} className="m-5 p-5 border-2 solid border-gray-300 rounded-lg 
                     hover:scale-110 duration-300">
-                        <Link to={`/blogtemplate/${'False'}`}>
+                        <Link to={`/blogtemplate/${'True'}`}>
                             <h1 className="text-3xl pb-4">{blog.title}</h1>
                             <p>Written by: <b>{blog.author}</b></p>
                             <p>Date Added: <b>{blog.date}</b></p>
