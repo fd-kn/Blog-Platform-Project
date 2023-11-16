@@ -6,6 +6,7 @@ import { db } from "./firebaseconfig";
 const Blogs = () => {
 
     const [allblogs, setAllblogs] = useState([])
+    const [isLoaded, setIsLoaded] = useState(false)
 
 
     var isSignedIn;
@@ -28,8 +29,8 @@ const Blogs = () => {
                         title: doc.data().title,
                         post: doc.data().post,
                         author: doc.data().userName,
-                        date: doc.data().dateAdded,
-                        time: doc.data().timeAdded,
+                        date: doc.data().datePublished,
+                        time: doc.data().timePublished,
                         blogID: doc.data().blogID
                     }
                     newBlogs.push(blogDetails);
@@ -38,13 +39,22 @@ const Blogs = () => {
 
 
                     newBlogs.sort((a, b) => {
-                        const dateTimeA = new Date(`${a.date} ${a.time}`);
-                        const dateTimeB = new Date(`${b.date} ${b.time}`);
+                        const [dayA, monthA, yearA] = a.date.split('/');
+                        const [hourA, minuteA, secondA] = a.time.split(':');
+                      
+                        const [dayB, monthB, yearB] = b.date.split('/');
+                        const [hourB, minuteB, secondB] = b.time.split(':');
+  
+                      
+                        const dateTimeA = new Date(yearA, monthA - 1, dayA, hourA, minuteA, secondA);
+                        const dateTimeB = new Date(yearB, monthB - 1, dayB, hourB, minuteB, secondB);
+  
                         return dateTimeB - dateTimeA;
                       });
             
                       setAllblogs(newBlogs);
                       console.log(newBlogs);
+                      setIsLoaded(true);
             })
 
           } catch (error) {
@@ -57,32 +67,43 @@ const Blogs = () => {
 
     return ( 
         <div className="flex justify-center m-10 mt-20">
-            {(isSignedIn) ? 
+            
             <div>
-                <button className="border-2 rounded-xl border-black
-                p-5 hover:scale-110 duration-300 hover:bg-slate-300">
-                <Link to = '/createpost'>Create Blog Post</Link></button> 
-
-                <button className="border-2 rounded-xl border-black
-                p-5 ml-5 hover:scale-110 duration-300 hover:bg-slate-300">
-                <Link to = '/ownblogs'>My Blogs</Link></button>
-
-                <div className="flex justify-start m-5">
-                {allblogs.map((blog, index) => (
-                    <div key={index}  className="m-5 p-5 border-2 solid border-gray-300 rounded-lg 
-                    hover:scale-110 duration-300">
-                        <Link to={`/blogtemplate/${'False'}`}>
-                            <h1 className="text-3xl pb-4">{blog.title}</h1>
-                            <p>Written by: <b>{blog.author}</b></p>
-                            <p>Date Added: <b>{blog.date}</b></p>
-                        </Link>
+            {isSignedIn && isLoaded && (
+                <div className="flex">
+                    <div>
+                        <button className="border-2 rounded-xl border-black
+                        p-5 hover:scale-110 duration-300 hover:bg-slate-300 ">
+                        <Link to = '/createpost'>Create Blog Post</Link></button> 
                     </div>
-                ))}
+                    <div>
+                        <button className="border-2 rounded-xl border-black
+                        p-5 ml-5 hover:scale-110 duration-300 hover:bg-slate-300">
+                        <Link to = '/ownblogs'>My Blogs</Link></button>
+                    </div>
+                </div>
+            )}
+            
+                <div className="flex justify-start m-5">
+                {allblogs.length === 0 && isLoaded ? (
+                    <p>No blogs available.</p>
+                    ) : (
+                     allblogs.map((blog, index) => (
+                        <div key={index}  className="m-5 p-5 border-2 solid border-gray-300 rounded-lg 
+                        hover:scale-110 duration-300">
+                            <Link to={`/blogtemplate/${'Published'}`}>
+                                <h1 className="text-3xl pb-4">{blog.title}</h1>
+                                <p>Written by: <b>{blog.author}</b></p>
+                                <p>Date Published: <b>{blog.date}</b></p>
+                            </Link>
+                        </div>
+                    ))
+                    )}
+                </div>
             </div>
             </div>
             
-            : <p>Here are some random blog posts</p>}
-        </div>
+            
      );
 }
  

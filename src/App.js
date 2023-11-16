@@ -3,8 +3,8 @@ import Home from "./Home";
 import Navbar from "./Navbar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NoPage from "./NoPage";
-import Stories from "./Stories";
-import Settings from "./Settings";
+// import Stories from "./Stories";
+// import Settings from "./Settings";
 import LogIn from "./LogIn";
 import SignUp from "./SignUp";
 import CreatePost from "./CreatePost";
@@ -34,8 +34,8 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<LogIn />} />
           <Route path="/ownblogs" element={<OwnBlogs />} />
-          <Route path="/blogtemplate/True" element={<BlogTemplate isPublic={'True'} />} />
-          <Route path="/blogtemplate/False" element={<BlogTemplate isPublic={'False'}/>} />
+          <Route path="/blogtemplate/Published" element={<BlogTemplate isPublic={'Published'} />} />
+          <Route path="/blogtemplate/NotPublished" element={<BlogTemplate isPublic={'NotPublished'}/>} />
 
 
           <Route path="*" element={<NoPage />} />

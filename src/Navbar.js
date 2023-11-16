@@ -18,10 +18,12 @@ const Navbar = () => {
 
     useEffect(() => {
         if(userID !== ''){
+          console.log(userID)
         const fetchData = async () => {
           try {
             const docRef = doc(db, "users", userID);
             const docSnap = await getDoc(docRef);
+            
     
             if (docSnap.exists()) {
               console.log("Username:", docSnap.data().userName);
@@ -32,6 +34,7 @@ const Navbar = () => {
             }
           } catch (error) {
             console.error("Error fetching data:", error);
+            console.error('User???')
           }
         };
     

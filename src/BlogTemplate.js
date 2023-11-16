@@ -1,4 +1,4 @@
-import { collection, deleteDoc, doc, getDoc, getDocs, query, setDoc, where } from "firebase/firestore";
+import { collection, deleteDoc, doc, getDoc, getDocs, query, setDoc, updateDoc, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "./firebaseconfig";
 import { Link } from "react-router-dom";
@@ -42,7 +42,9 @@ const BlogTemplate = ({isPublic}) => {
                         date: doc.data().dateAdded,
                         time: doc.data().timeAdded,
                         blogID: doc.data().blogID,
-                        userID: userID
+                        userID: userID,
+                        isPublished: doc.data().isPublished                      
+
                       };
                     setBlogpost(blogDetails);
             } else{
@@ -57,7 +59,7 @@ const BlogTemplate = ({isPublic}) => {
     
         fetchData();
       }
-      }, [blogID]);
+      }, [blogID,userID]);
 
 
       const deleteBlog = async (blogID) => {
@@ -69,17 +71,30 @@ const BlogTemplate = ({isPublic}) => {
       }
 
       const publishBlog = async () => {
-        
+
+        const now = new Date();
+        const day = now.getDate();
+        const month = now.getMonth() + 1;
+        const year = now.getFullYear();
+        const hours = now.getHours();
+        const minutes = now.getMinutes();
+        const seconds = now.getSeconds()
+
+        const fDate = `${day}/${month}/${year}`;
+        const fTime = `${hours}:${minutes}:${seconds}`;
+
+        const blogRef = doc(db, 'allBlogs', blogID);
         try {
 
+          await updateDoc(blogRef, { datePublished: fDate, timePublished: fTime, isPublished: true });
           await setDoc(doc(db, "publicBlogs", blogID), {
               title: blogpost.title,
               post: blogpost.post,
               id: blogpost.userID,
               userName: blogpost.author,
               blogID: blogpost.blogID,
-              dateAdded: blogpost.date,
-              timeAdded: blogpost.time
+              datePublished: fDate,
+              timePublished: fTime
           });
           window.location.replace('/blogs')
           console.log("Data added to Firestore successfully");
@@ -105,7 +120,7 @@ const BlogTemplate = ({isPublic}) => {
       )}
             </div>
                     
-           {isPublic === 'True' ? 
+           {isPublic === 'NotPublished' ? 
            <div>
             <button className="py-2 px-5 m-2 text-l
                     border-2 border-black rounded-xl hover:bg-slate-300 
@@ -113,12 +128,15 @@ const BlogTemplate = ({isPublic}) => {
             <button className="py-2 px-5 m-2 text-l
                     border-2 border-black rounded-xl hover:bg-slate-300 
                     hover:scale-110 duration-300" onClick={()=>deleteBlog(blogID)}>Delete</button>
-            </div>
-                  : null
-            }
             <button className="py-2 px-5 m-2 text-l
                     border-2 border-black rounded-xl hover:bg-slate-300 
                     hover:scale-110 duration-300"><Link to='/ownblogs'>Go Back</Link></button>
+            </div>
+                  : <button className="py-2 px-5 m-2 text-l
+                  border-2 border-black rounded-xl hover:bg-slate-300 
+                  hover:scale-110 duration-300"><Link to='/blogs'>Go Back</Link></button>
+            }
+
 
         </div>
      );

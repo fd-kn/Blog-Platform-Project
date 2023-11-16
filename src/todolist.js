@@ -2,9 +2,14 @@
 //! Layout of blogs (eg. no. of blogs on one line, sizes etc.)
 // Add publish function
 // Add delete function
-//! Add publish time and date
+// Add publish time and date
+//* Maybe pass blogID and userID through components rather than localstorage?
+// Show published time for blog template if blog is published 
+//Add published field for each blog 
 //! Sepearate drafts and published blogs in My Blogs
-//! Add field that checks if blog is published
+//! Change isPublished field if unpublished
+//! Add unpublish button which appears if blog is published
+// Add field that checks if blog is published
 // Delete public blogs when published blogs are deleted
 //! Provide 'Are you sure?' questions to delete and publish - JS Modals
 //! Media queries, prioritise mobile layout and check why

@@ -31,10 +31,9 @@ const CreatePost = () => {
         const hours = now.getHours();
         const minutes = now.getMinutes();
         const seconds = now.getSeconds()
-        const ms = now.getMilliseconds()
 
         const fDate = `${day}/${month}/${year}`;
-        const fTime = `${hours}:${minutes}:${seconds}:${ms}`;
+        const fTime = `${hours}:${minutes}:${seconds}`;
 
         try {
             const docRef = doc(db, "users", userID);
@@ -53,7 +52,10 @@ const CreatePost = () => {
                 userName: nameofUser,
                 blogID: randomID,
                 dateAdded: fDate,
-                timeAdded: fTime
+                timeAdded: fTime,
+                datePublished: 0,
+                timePublished: 0,
+                isPublished: false
             });
             window.location.replace('/ownblogs')
             console.log("Data added to Firestore successfully");
