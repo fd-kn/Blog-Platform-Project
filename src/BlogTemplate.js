@@ -118,11 +118,11 @@ const BlogTemplate = ({isPublic}) => {
     return ( 
         <div>
              
-            <div className="flex justify-start m-5">
+            <div className="m-5">
  
             {blogpost && (
-              <div>
-                <h1 className="text-3xl pb-4">{blogpost.title}</h1>
+              <div className="">
+                <h1 className="flex justify-center text-7xl pb-4">{blogpost.title}</h1>
                 <p className="text-2xl pb-5">Post: {blogpost.post}</p>
                 <p className="text-sm">Written by: <b>{blogpost.author}</b></p>
                 <p className="text-sm">Date Added: <b>{blogpost.date}</b></p>

@@ -22,6 +22,7 @@ function App() {
   }
 
   return (
+    <div className="bg-sky-300 h-screen ">
     <BrowserRouter>
     <Navbar />
       <Routes>
@@ -43,6 +44,7 @@ function App() {
         </Route>
       </Routes>
     </BrowserRouter>
+    </div>
   );
 }
 

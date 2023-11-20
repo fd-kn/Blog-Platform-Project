@@ -6,7 +6,10 @@ import { Link } from "react-router-dom";
 const OwnBlogs = () => {
 
 
-    const [allblogs, setAllblogs] = useState([])
+    const [allblogs, setAllblogs] = useState([]);
+    const [isDraft, setIsDraft] = useState(true);
+    const [draftBlogs, setDraftBlogs] = useState([]);
+    const [publishedBlogs, setPublishedBlogs] = useState([])
 
     var userID;
     if(JSON.parse(localStorage.getItem('userID'))){
@@ -60,6 +63,8 @@ const OwnBlogs = () => {
                     });
             
                       setAllblogs(newBlogs);
+                      setDraftBlogs(newBlogs.filter(blog => blog.isPublished === false));
+
                       console.log(newBlogs);
             })
 
@@ -76,12 +81,30 @@ const OwnBlogs = () => {
         localStorage.setItem('blogID', JSON.stringify(blogID));
       }
 
+      const handleSplit = (draft) => {
+        if(draft === 'Draft'){
+          setIsDraft(true);
+          setDraftBlogs(allblogs.filter(blog => blog.isPublished === false));
+        } else if(draft === 'Published'){
+          setIsDraft(false);
+          setPublishedBlogs(allblogs.filter(blog => blog.isPublished === true));
+        }
+      }
+
+      const blogsToMap = isDraft ? draftBlogs : publishedBlogs;
+
 
     return ( 
         <div>
         <h1 className="flex justify-start m-5 text-3xl italic">My Blogs</h1>
+        <div className="flex justify-start m-5 text-xl italic"> 
+          <h1 className={`p-2 m-2 hover:scale-110 duration-300 ${isDraft && 'underline'}`} onClick={() => handleSplit('Draft')} >Drafts</h1>
+          <h1 className={`p-2 m-2 hover:scale-110 duration-300 ${!isDraft && 'underline'}`} onClick={() => handleSplit('Published')}>Published</h1>
+        </div>
+
+
             <div className="flex justify-start m-5">
-                {allblogs.map((blog, index) => (
+                {blogsToMap.map((blog, index) => (
                     <div key={index} onClick={()=>handlePostClick(blog.blogID)} className="m-5 p-5 border-2 solid border-gray-300 rounded-lg 
                     hover:scale-110 duration-300">
                         <Link to={`/blogtemplate/${'NotPublished'}`}>
