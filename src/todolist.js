@@ -7,8 +7,8 @@
 // Show published time for blog template if blog is published 
 //Add published field for each blog 
 //! Sepearate drafts and published blogs in My Blogs
-//! Change isPublished field if unpublished
-//! Add unpublish button which appears if blog is published
+// Change isPublished field if unpublished
+// Add unpublish button which appears if blog is published
 // Add field that checks if blog is published
 // Delete public blogs when published blogs are deleted
 //! Provide 'Are you sure?' questions to delete and publish - JS Modals

@@ -64,7 +64,17 @@ const BlogTemplate = ({isPublic}) => {
 
       const deleteBlog = async (blogID) => {
         await deleteDoc(doc(db, "allBlogs", blogID));
+        // await deleteDoc(doc(db, "publicBlogs", blogID));
+        
+        window.location.replace('/ownblogs')
+
+      }
+
+      const unpublishBlog = async (blogID) => {
+        const blogRef = doc(db, 'allBlogs', blogID);
         await deleteDoc(doc(db, "publicBlogs", blogID));
+        await updateDoc(blogRef, { datePublished: 0, timePublished: 0, isPublished: false });
+
         
         window.location.replace('/ownblogs')
 
@@ -116,11 +126,13 @@ const BlogTemplate = ({isPublic}) => {
                 <p className="text-2xl pb-5">Post: {blogpost.post}</p>
                 <p className="text-sm">Written by: <b>{blogpost.author}</b></p>
                 <p className="text-sm">Date Added: <b>{blogpost.date}</b></p>
+                <p className="text-sm">Published?: <b>{typeof(blogpost.isPublished)}</b></p>
+
               </div>
       )}
             </div>
                     
-           {isPublic === 'NotPublished' ? 
+           {isPublic === 'NotPublished' && blogpost && blogpost.isPublished === false ? 
            <div>
             <button className="py-2 px-5 m-2 text-l
                     border-2 border-black rounded-xl hover:bg-slate-300 
@@ -132,7 +144,17 @@ const BlogTemplate = ({isPublic}) => {
                     border-2 border-black rounded-xl hover:bg-slate-300 
                     hover:scale-110 duration-300"><Link to='/ownblogs'>Go Back</Link></button>
             </div>
-                  : <button className="py-2 px-5 m-2 text-l
+                  : isPublic === 'NotPublished' && blogpost &&  blogpost.isPublished === true ?
+              <div>
+                  <button className="py-2 px-5 m-2 text-l
+                  border-2 border-black rounded-xl hover:bg-slate-300 
+                  hover:scale-110 duration-300" onClick={()=>unpublishBlog(blogID)}>Unpublish</button>
+                   <button className="py-2 px-5 m-2 text-l
+                  border-2 border-black rounded-xl hover:bg-slate-300 
+                  hover:scale-110 duration-300"><Link to='/ownblogs'>Go Back</Link></button>
+                </div>  
+                  :
+                  <button className="py-2 px-5 m-2 text-l
                   border-2 border-black rounded-xl hover:bg-slate-300 
                   hover:scale-110 duration-300"><Link to='/blogs'>Go Back</Link></button>
             }
