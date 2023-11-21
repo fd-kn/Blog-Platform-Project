@@ -60,11 +60,11 @@ const Navbar = () => {
     }
 
     return ( 
-        <div className="border-b-4 border-b-black">
+        <div className="border-b-4 border-b-black ">
             {/* <div className="flex justify-center m-5">
                 <h1 className="text-3xl">The Writer's Block</h1>
             </div> */}
-            <ul className="flow-root m-4 ">
+            <ul className="flow-root p-4">
                 <h1 className="float-left pl-3 text-3xl hover:scale-110 duration-300"><Link to="/home">The Writer's Block</Link></h1>
                 <div className="pt-2"> 
                     

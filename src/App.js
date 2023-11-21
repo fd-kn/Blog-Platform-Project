@@ -22,8 +22,9 @@ function App() {
   }
 
   return (
-    <div className="bg-sky-300 h-screen ">
+    <div className="">
     <BrowserRouter>
+    <div className="bg-gradient-to-r from-gray-200 to-green-800 h-screen ">
     <Navbar />
       <Routes>
         <Route>
@@ -43,7 +44,9 @@ function App() {
           {(isSignedIn) ? <Route path="/createpost" element = {<CreatePost />} /> : null}
         </Route>
       </Routes>
+      </div>
     </BrowserRouter>
+    
     </div>
   );
 }

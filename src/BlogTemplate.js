@@ -43,7 +43,9 @@ const BlogTemplate = ({isPublic}) => {
                         time: doc.data().timeAdded,
                         blogID: doc.data().blogID,
                         userID: userID,
-                        isPublished: doc.data().isPublished                      
+                        isPublished: doc.data().isPublished,
+                        datePublished: doc.data().datePublished,
+                        timePublished: doc.data().timePublished                    
 
                       };
                     setBlogpost(blogDetails);
@@ -125,7 +127,7 @@ const BlogTemplate = ({isPublic}) => {
                 <h1 className="flex justify-center text-7xl pb-4">{blogpost.title}</h1>
                 <p className="text-2xl pb-5">Post: {blogpost.post}</p>
                 <p className="text-sm">Written by: <b>{blogpost.author}</b></p>
-                <p className="text-sm">Date Added: <b>{blogpost.date}</b></p>
+                <p className="text-sm">Date Added: <b>{isPublic === 'NotPublished' ? blogpost.date : blogpost.datePublished}</b></p>
                 <p className="text-sm">Published?: <b>{typeof(blogpost.isPublished)}</b></p>
 
               </div>

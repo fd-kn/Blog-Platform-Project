@@ -64,6 +64,10 @@ const Blogs = () => {
         fetchData()
       }, []);
 
+      const handlePostClick = (blogID) => {
+        localStorage.setItem('blogID', JSON.stringify(blogID));
+      }
+
 
     return ( 
         <div className="flex justify-center m-10 mt-20">
@@ -89,7 +93,7 @@ const Blogs = () => {
                     <p>No blogs available.</p>
                     ) : (
                      allblogs.map((blog, index) => (
-                        <div key={index}  className="m-5 p-5 border-2 solid border-gray-300 rounded-lg 
+                        <div key={index} onClick={()=>handlePostClick(blog.blogID)} className="m-5 p-5 border-2 solid border-gray-300 rounded-lg 
                         hover:scale-110 duration-300">
                             <Link to={`/blogtemplate/${'Published'}`}>
                                 <h1 className="text-3xl pb-4">{blog.title}</h1>
