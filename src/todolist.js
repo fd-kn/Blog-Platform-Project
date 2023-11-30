@@ -7,9 +7,10 @@
 // Show published time for blog template if blog is published 
 //Add published field for each blog 
 // Show public blogs if user is not signed in
-//! Full screen colours
+// Full screen colours
 // Sepearate drafts and published blogs in My Blogs
 //! Edit blogs
+//! Make random blog account and check out how they work
 // Change isPublished field if unpublished
 // Add unpublish button which appears if blog is published
 // Add field that checks if blog is published

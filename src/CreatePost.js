@@ -69,7 +69,7 @@ const CreatePost = () => {
         <div className="">
             <h1 className="flex justify-center text-3xl mt-10">Create Blog Post</h1>
             <div className="flex justify-center mt-10">
-                <form onSubmit={handlePost}>
+                <form onSubmit={handlePost} className="w-1/2">
 
                     <label className='p-2 m-1 italic '>Title</label>
                     <div>
@@ -82,8 +82,8 @@ const CreatePost = () => {
                     {/* MAKE TEXTAREA BIGGER */}
 
                     <label className='p-2 m-1 italic '>Post</label>
-                    <div className="w-full h-full mb-4"> 
-                        <textarea className="p-2 h-full resize-none w-full bg-transparent border-2 border-gray-300 rounded-md text-xl m-2 mb-4"   
+                    <div className=" pb-4"> 
+                        <textarea className="p-2 resize-none w-full h-64 bg-transparent border-2 border-gray-300 rounded-md text-xl "   
                          required placeholder='Enter blog content...'
                          onChange={(e) => { setPost(e.target.value)}}
                         ></textarea>

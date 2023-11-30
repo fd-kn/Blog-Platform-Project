@@ -95,11 +95,11 @@ const OwnBlogs = () => {
 
 
     return ( 
-        <div>
+        <div className="h-screen">
         <h1 className="flex justify-start m-5 text-3xl italic">My Blogs</h1>
         <div className="flex justify-start m-5 text-xl italic"> 
-          <h1 className={`p-2 m-2 hover:scale-110 duration-300 ${isDraft && 'underline'}`} onClick={() => handleSplit('Draft')} >Drafts</h1>
-          <h1 className={`p-2 m-2 hover:scale-110 duration-300 ${!isDraft && 'underline'}`} onClick={() => handleSplit('Published')}>Published</h1>
+          <button className={`p-2 m-2 hover:scale-110 duration-300 ${isDraft && 'underline'}`} onClick={() => handleSplit('Draft')} >Drafts</button>
+          <button className={`p-2 m-2 hover:scale-110 duration-300 ${!isDraft && 'underline'}`} onClick={() => handleSplit('Published')}>Published</button>
         </div>
 
 

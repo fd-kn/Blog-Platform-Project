@@ -70,6 +70,7 @@ const Blogs = () => {
 
 
     return ( 
+        <div className="h-screen">
         <div className="flex justify-center m-10 mt-20">
             
             <div>
@@ -107,7 +108,7 @@ const Blogs = () => {
             </div>
             </div>
             
-            
+            </div>
      );
 }
  

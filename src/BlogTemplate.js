@@ -118,7 +118,7 @@ const BlogTemplate = ({isPublic}) => {
 
 
     return ( 
-        <div>
+        <div className="h-screen">
              
             <div className="m-5">
  
@@ -142,9 +142,12 @@ const BlogTemplate = ({isPublic}) => {
             <button className="py-2 px-5 m-2 text-l
                     border-2 border-black rounded-xl hover:bg-slate-300 
                     hover:scale-110 duration-300" onClick={()=>deleteBlog(blogID)}>Delete</button>
+                                                   <button className="py-2 px-5 m-2 text-l
+                  border-2 border-black rounded-xl hover:bg-slate-300 
+                  hover:scale-110 duration-300">Edit</button>
             <button className="py-2 px-5 m-2 text-l
                     border-2 border-black rounded-xl hover:bg-slate-300 
-                    hover:scale-110 duration-300"><Link to='/ownblogs'>Go Back</Link></button>
+                    hover:scale-110 duration-300"><Link to='/ownblogs'>Back</Link></button>
             </div>
                   : isPublic === 'NotPublished' && blogpost &&  blogpost.isPublished === true ?
               <div>
@@ -153,13 +156,25 @@ const BlogTemplate = ({isPublic}) => {
                   hover:scale-110 duration-300" onClick={()=>unpublishBlog(blogID)}>Unpublish</button>
                    <button className="py-2 px-5 m-2 text-l
                   border-2 border-black rounded-xl hover:bg-slate-300 
-                  hover:scale-110 duration-300"><Link to='/ownblogs'>Go Back</Link></button>
+                  hover:scale-110 duration-300"><Link to='/ownblogs'>Back</Link></button>
+                                                 <button className="py-2 px-5 m-2 text-l
+                  border-2 border-black rounded-xl hover:bg-slate-300 
+                  hover:scale-110 duration-300">Edit</button>
                 </div>  
                   :
                   <button className="py-2 px-5 m-2 text-l
                   border-2 border-black rounded-xl hover:bg-slate-300 
-                  hover:scale-110 duration-300"><Link to='/blogs'>Go Back</Link></button>
+                  hover:scale-110 duration-300"><Link to='/blogs'>Back</Link></button>
             }
+
+              {/* <div className=" fixed inset-0 z-50 flex items-center justify-center overflow-auto bg-black bg-opacity-50">
+                    <div className="border-2 border-black bg-blue-200 w-1/2 p-4 rounded-lg">
+                      <p>Are you sure you want to publish this blog?</p>
+                      <button>Yes</button>
+                      <button>No</button>
+                    </div>
+                  </div> */}
+
 
 
         </div>

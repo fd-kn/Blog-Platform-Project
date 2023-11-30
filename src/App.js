@@ -22,9 +22,9 @@ function App() {
   }
 
   return (
-    <div className="">
+    <div className="h-full">
     <BrowserRouter>
-    <div className="bg-gradient-to-r from-gray-200 to-green-800 h-screen ">
+    <div className="bg-gradient-to-r from-gray-200 to-green-800 h-full ">
     <Navbar />
       <Routes>
         <Route>

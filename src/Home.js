@@ -16,7 +16,7 @@ const Home = () => {
     }
 
     return ( 
-        <div>
+        <div className="h-screen">
             <div className="flex justify-center my-10">
                 <h1 className="text-3xl italic bold underline">Welcome to The Writer's Block!</h1>
             </div>
