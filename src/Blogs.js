@@ -71,11 +71,11 @@ const Blogs = () => {
 
     return ( 
         <div className="h-screen">
-        <div className="flex justify-center m-10 mt-20">
+        <div className=" m-10 mt-20">
             
             <div>
             {isSignedIn && isLoaded && (
-                <div className="flex">
+                <div className="flex justify-center">
                     <div>
                         <button className="border-2 rounded-xl border-black
                         p-5 hover:scale-110 duration-300 hover:bg-slate-300 ">
@@ -89,12 +89,12 @@ const Blogs = () => {
                 </div>
             )}
             
-                <div className="flex justify-start m-5">
+                <div className="flex flex-wrap justify-start m-5">
                 {allblogs.length === 0 && isLoaded ? (
                     <p>No blogs available.</p>
                     ) : (
                      allblogs.map((blog, index) => (
-                        <div key={index} onClick={()=>handlePostClick(blog.blogID)} className="m-5 p-5 border-2 solid border-gray-300 rounded-lg 
+                        <div key={index} onClick={()=>handlePostClick(blog.blogID)} className=" w-1/5 m-5 p-5 border-2 solid border-gray-300 rounded-lg 
                         hover:scale-110 duration-300">
                             <Link to={`/blogtemplate/${'Published'}`}>
                                 <h1 className="text-3xl pb-4">{blog.title}</h1>

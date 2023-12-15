@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { auth, db } from "./firebaseconfig";
-import { doc, getDoc } from "firebase/firestore";
-import { useEffect, useState } from "react";
+// import { auth, db } from "./firebaseconfig";
+// import { doc, getDoc } from "firebase/firestore";
+// import { useEffect, useState } from "react";
 
 
 const Home = () => {

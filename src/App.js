@@ -24,7 +24,7 @@ function App() {
   return (
     <div className="h-full">
     <BrowserRouter>
-    <div className="bg-gradient-to-r from-gray-200 to-green-800 h-full ">
+    <div className="bg-gradient-to-br from-purple-400 via-red-200 to-blue-300 h-full ">
     <Navbar />
       <Routes>
         <Route>

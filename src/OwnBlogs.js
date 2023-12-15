@@ -11,6 +11,13 @@ const OwnBlogs = () => {
     const [draftBlogs, setDraftBlogs] = useState([]);
     const [publishedBlogs, setPublishedBlogs] = useState([])
 
+    useEffect(() => {
+      const draftStorage = JSON.parse(localStorage.getItem('draftStorage'));
+      if (draftStorage !== null) {
+        setIsDraft(draftStorage);
+      }
+    }, []);
+
     var userID;
     if(JSON.parse(localStorage.getItem('userID'))){
         userID = JSON.parse(localStorage.getItem('userID'));
@@ -64,6 +71,8 @@ const OwnBlogs = () => {
             
                       setAllblogs(newBlogs);
                       setDraftBlogs(newBlogs.filter(blog => blog.isPublished === false));
+                      setPublishedBlogs(newBlogs.filter(blog => blog.isPublished === true));
+
 
                       console.log(newBlogs);
             })
@@ -84,9 +93,12 @@ const OwnBlogs = () => {
       const handleSplit = (draft) => {
         if(draft === 'Draft'){
           setIsDraft(true);
+          localStorage.setItem('draftStorage', JSON.stringify(true));
+
           setDraftBlogs(allblogs.filter(blog => blog.isPublished === false));
         } else if(draft === 'Published'){
           setIsDraft(false);
+          localStorage.setItem('draftStorage', JSON.stringify(false));
           setPublishedBlogs(allblogs.filter(blog => blog.isPublished === true));
         }
       }
@@ -95,7 +107,7 @@ const OwnBlogs = () => {
 
 
     return ( 
-        <div className="h-screen">
+        <div className="h-screen w-screen">
         <h1 className="flex justify-start m-5 text-3xl italic">My Blogs</h1>
         <div className="flex justify-start m-5 text-xl italic"> 
           <button className={`p-2 m-2 hover:scale-110 duration-300 ${isDraft && 'underline'}`} onClick={() => handleSplit('Draft')} >Drafts</button>
@@ -103,14 +115,22 @@ const OwnBlogs = () => {
         </div>
 
 
-            <div className="flex justify-start m-5">
+            <div className="flex flex-wrap justify-start m-5">
                 {blogsToMap.map((blog, index) => (
-                    <div key={index} onClick={()=>handlePostClick(blog.blogID)} className="m-5 p-5 border-2 solid border-gray-300 rounded-lg 
+                    <div key={index} onClick={()=>handlePostClick(blog.blogID)} 
+                    className=" w-1/5 m-5 p-5 border-2 solid border-gray-300 rounded-lg 
                     hover:scale-110 duration-300">
                         <Link to={`/blogtemplate/${'NotPublished'}`}>
                             <h1 className="text-3xl pb-4">{blog.title}</h1>
                             <p>Written by: <b>{blog.author}</b></p>
-                            <p>Date Added: <b>{blog.date}</b></p>
+                            {isDraft ? <p>Date Added: <b>{blog.date}</b></p> : 
+                            <div>
+                              <p>Date Added: <b>{blog.date}</b></p>
+                              <p>Date Published: <b>{blog.datePublished}</b></p>
+                            </div>
+                             }
+                            
+
                         </Link>
                     </div>
                 ))}

@@ -47,7 +47,7 @@ const CreatePost = () => {
             const randomID = uuidv4()
             await setDoc(doc(db, "allBlogs", randomID), {
                 title: title,
-                post: post,
+                post: post.split('\n'),
                 id: userID,
                 userName: nameofUser,
                 blogID: randomID,
@@ -83,7 +83,9 @@ const CreatePost = () => {
 
                     <label className='p-2 m-1 italic '>Post</label>
                     <div className=" pb-4"> 
-                        <textarea className="p-2 resize-none w-full h-64 bg-transparent border-2 border-gray-300 rounded-md text-xl "   
+                        <textarea className="p-2 resize-none w-full h-64 
+                        bg-transparent border-2 border-gray-300 rounded-md text-xl 
+                        whitespace-pre-wrap"   
                          required placeholder='Enter blog content...'
                          onChange={(e) => { setPost(e.target.value)}}
                         ></textarea>

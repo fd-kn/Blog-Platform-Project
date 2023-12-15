@@ -1,12 +1,18 @@
-import { collection, deleteDoc, doc, getDoc, getDocs, query, setDoc, updateDoc, where } from "firebase/firestore";
+import { collection, deleteDoc, doc, getDocs, query, setDoc, updateDoc, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "./firebaseconfig";
 import { Link } from "react-router-dom";
+import ConfirmModal from "./ConfirmModal";
 
 const BlogTemplate = ({isPublic}) => {
 
 
     const [blogpost, setBlogpost] = useState()
+    const [isLoaded, setIsLoaded] = useState(false)
+    const [showModal, setShowModal] = useState(false);
+    const [action, setAction] = useState('');
+
+
 
 
     var blogID;
@@ -49,6 +55,7 @@ const BlogTemplate = ({isPublic}) => {
 
                       };
                     setBlogpost(blogDetails);
+                    // setIsLoaded(true);
             } else{
               console.log("No blog found with the specified blogID");
 
@@ -113,67 +120,111 @@ const BlogTemplate = ({isPublic}) => {
       } catch (error) {
           console.error("Error adding data to Firestore:", error);
       }
+      setShowModal(false);
       }
+
+      const handleConfirmation = (action) => {
+        switch (action) {
+          case 'unpublish':
+            unpublishBlog();
+            break;
+          case 'delete':
+            deleteBlog();
+            break;
+          case 'publish':
+            publishBlog();
+            break;
+          default:
+            break;
+        }
+      };
+
+      const handleButtonClick = (action) => {
+        setShowModal(true);
+        setAction(action);
+      }
+
+      const handleCancel = () => {
+        setShowModal(false);
+      };
 
 
 
     return ( 
-        <div className="h-screen">
+        <div >
              
             <div className="m-5">
  
             {blogpost && (
               <div className="">
                 <h1 className="flex justify-center text-7xl pb-4">{blogpost.title}</h1>
-                <p className="text-2xl pb-5">Post: {blogpost.post}</p>
-                <p className="text-sm">Written by: <b>{blogpost.author}</b></p>
-                <p className="text-sm">Date Added: <b>{isPublic === 'NotPublished' ? blogpost.date : blogpost.datePublished}</b></p>
-                <p className="text-sm">Published?: <b>{typeof(blogpost.isPublished)}</b></p>
+                <div className="flex">
+                <p className="text-sm mr-6">Written by: <b>{blogpost.author}</b></p>
+
+                {isPublic === 'NotPublished' && blogpost.isPublished === true ?
+                <div>
+                  <p className="text-sm">Date Added: <b>{blogpost.date}</b></p>
+                  <p className="text-sm">Date Published: <b>{blogpost.datePublished}</b></p>
+                  </div> :
+                  isPublic === 'NotPublished' && blogpost.isPublished === false ?
+                  <p className="text-sm">Date Added: <b>{blogpost.date}</b></p>:
+                  <p className="text-sm">Date Published: <b>{blogpost.datePublished}</b></p>
+                }
+                </div>
+
+                  <p className=" text-xl p-10">
+                    {Array.isArray(blogpost.post) ? 
+                    blogpost.post.map((postItem, index) => (
+                    <p key={index}>{postItem}</p> 
+                    )) : blogpost.post }
+                  </p>
+
 
               </div>
       )}
             </div>
-                    
+            <ConfirmModal
+                isOpen={showModal}
+                message="Are you sure?"
+                onConfirm={() => handleConfirmation(action)}
+                onCancel={handleCancel}
+              />
+          {/* BLOG ISN'T PUBLISHED AND ON OWN BLOGS PAGE */}
            {isPublic === 'NotPublished' && blogpost && blogpost.isPublished === false ? 
            <div>
             <button className="py-2 px-5 m-2 text-l
                     border-2 border-black rounded-xl hover:bg-slate-300 
-                    hover:scale-110 duration-300" onClick={publishBlog}>Publish</button>
+                    hover:scale-110 duration-300" onClick={()=>handleButtonClick('publish')}>Publish</button>
             <button className="py-2 px-5 m-2 text-l
                     border-2 border-black rounded-xl hover:bg-slate-300 
                     hover:scale-110 duration-300" onClick={()=>deleteBlog(blogID)}>Delete</button>
-                                                   <button className="py-2 px-5 m-2 text-l
+            <button className="py-2 px-5 m-2 text-l
                   border-2 border-black rounded-xl hover:bg-slate-300 
                   hover:scale-110 duration-300">Edit</button>
             <button className="py-2 px-5 m-2 text-l
                     border-2 border-black rounded-xl hover:bg-slate-300 
                     hover:scale-110 duration-300"><Link to='/ownblogs'>Back</Link></button>
             </div>
+            // BLOG IS PUBLISHED AND ON OWN BLOGS PAGE
                   : isPublic === 'NotPublished' && blogpost &&  blogpost.isPublished === true ?
               <div>
                   <button className="py-2 px-5 m-2 text-l
                   border-2 border-black rounded-xl hover:bg-slate-300 
                   hover:scale-110 duration-300" onClick={()=>unpublishBlog(blogID)}>Unpublish</button>
-                   <button className="py-2 px-5 m-2 text-l
+                  <button className="py-2 px-5 m-2 text-l
                   border-2 border-black rounded-xl hover:bg-slate-300 
-                  hover:scale-110 duration-300"><Link to='/ownblogs'>Back</Link></button>
-                                                 <button className="py-2 px-5 m-2 text-l
+                  hover:scale-110 duration-300"><Link to='/ownblogs'>Back</Link></button> 
+                  <button className="py-2 px-5 m-2 text-l
                   border-2 border-black rounded-xl hover:bg-slate-300 
                   hover:scale-110 duration-300">Edit</button>
                 </div>  
+                // BLOG IS PUBLISHED AND ON PUBLIC BLOGS PAGE
                   :
                   <button className="py-2 px-5 m-2 text-l
                   border-2 border-black rounded-xl hover:bg-slate-300 
                   hover:scale-110 duration-300"><Link to='/blogs'>Back</Link></button>
             }
 
-              {/* <div className=" fixed inset-0 z-50 flex items-center justify-center overflow-auto bg-black bg-opacity-50">
-                    <div className="border-2 border-black bg-blue-200 w-1/2 p-4 rounded-lg">
-                      <p>Are you sure you want to publish this blog?</p>
-                      <button>Yes</button>
-                      <button>No</button>
-                    </div>
-                  </div> */}
 
 
 
