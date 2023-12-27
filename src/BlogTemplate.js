@@ -11,6 +11,7 @@ const BlogTemplate = ({isPublic}) => {
     const [isLoaded, setIsLoaded] = useState(false)
     const [showModal, setShowModal] = useState(false);
     const [action, setAction] = useState('');
+    const [storeId, setStoreId] = useState('')
 
 
 
@@ -123,13 +124,13 @@ const BlogTemplate = ({isPublic}) => {
       setShowModal(false);
       }
 
-      const handleConfirmation = (action) => {
+      const handleConfirmation = (action,storeId) => {
         switch (action) {
           case 'unpublish':
-            unpublishBlog();
+            unpublishBlog(storeId);
             break;
           case 'delete':
-            deleteBlog();
+            deleteBlog(storeId);
             break;
           case 'publish':
             publishBlog();
@@ -139,9 +140,10 @@ const BlogTemplate = ({isPublic}) => {
         }
       };
 
-      const handleButtonClick = (action) => {
+      const handleButtonClick = (action, blogID) => {
         setShowModal(true);
         setAction(action);
+        setStoreId(blogID);
       }
 
       const handleCancel = () => {
@@ -186,7 +188,7 @@ const BlogTemplate = ({isPublic}) => {
             <ConfirmModal
                 isOpen={showModal}
                 message="Are you sure?"
-                onConfirm={() => handleConfirmation(action)}
+                onConfirm={() => handleConfirmation(action, storeId)}
                 onCancel={handleCancel}
               />
           {/* BLOG ISN'T PUBLISHED AND ON OWN BLOGS PAGE */}
@@ -197,7 +199,7 @@ const BlogTemplate = ({isPublic}) => {
                     hover:scale-110 duration-300" onClick={()=>handleButtonClick('publish')}>Publish</button>
             <button className="py-2 px-5 m-2 text-l
                     border-2 border-black rounded-xl hover:bg-slate-300 
-                    hover:scale-110 duration-300" onClick={()=>deleteBlog(blogID)}>Delete</button>
+                    hover:scale-110 duration-300" onClick={()=>handleButtonClick('delete', blogID)}>Delete</button>
             <button className="py-2 px-5 m-2 text-l
                   border-2 border-black rounded-xl hover:bg-slate-300 
                   hover:scale-110 duration-300">Edit</button>

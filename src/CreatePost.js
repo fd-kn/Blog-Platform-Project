@@ -3,12 +3,16 @@ import { db } from "./firebaseconfig";
 import { useState } from "react";
 import {v4 as uuidv4} from 'uuid';
 import { Link } from "react-router-dom";
+import ConfirmModal from "./ConfirmModal";
+
 
 
 const CreatePost = () => {
     
     const [title, setTitle] = useState('')
     const [post, setPost] = useState('')
+    const [showModal, setShowModal] = useState(false);
+
 
     var userID;
     if(JSON.parse(localStorage.getItem('userID'))){
@@ -20,7 +24,10 @@ const CreatePost = () => {
     
 
     const handlePost = async (event) => {
-        event.preventDefault();
+        if (event) {
+            event.preventDefault();
+        }
+
 
         var nameofUser = 'N/A'
 
@@ -63,13 +70,25 @@ const CreatePost = () => {
             console.error("Error adding data to Firestore:", error);
         }}
 
+        const handleConfirmation = async () => {
+            setShowModal(false);
+            await handlePost();
+        };
+
+        const handleCancel = () => {
+            setShowModal(false);
+            window.location.replace('/blogs')
+
+          };    
+
 
 
     return (
         <div className="">
             <h1 className="flex justify-center text-3xl mt-10">Create Blog Post</h1>
             <div className="flex justify-center mt-10">
-                <form onSubmit={handlePost} className="w-1/2">
+                <div className="">
+                <form onSubmit={handlePost}>
 
                     <label className='p-2 m-1 italic '>Title</label>
                     <div>
@@ -90,13 +109,24 @@ const CreatePost = () => {
                          onChange={(e) => { setPost(e.target.value)}}
                         ></textarea>
                     </div>
+
+                    <ConfirmModal
+                        isOpen={showModal}
+                        message="Do you wish to save your work?"
+                        onConfirm={handleConfirmation}
+                        onCancel={handleCancel}
+                    />
+
                     <button className="py-2 px-5 m-2 text-l
                     border-2 border-black rounded-xl hover:bg-slate-300 
                     hover:scale-110 duration-300" type="submit">Save Draft</button>
-                    <button className="py-2 px-5 m-2 text-l
-                    border-2 border-black rounded-xl hover:bg-slate-300 
-                    hover:scale-110 duration-300"><Link to='/blogs'>Cancel</Link></button>  {/* onlick go back to blogs page */}
                 </form>
+
+                <button className="py-2 px-5 m-2 text-l
+                    border-2 border-black rounded-xl hover:bg-slate-300 
+                    hover:scale-110 duration-300"  onClick={()=>setShowModal(true)}>Cancel</button>  {/* onlick go back to blogs page */}
+                {/* ADD onclick above TO SAVE CHANGES IF USER CANCELS */}
+            </div>
             </div>
         </div> 
      );
