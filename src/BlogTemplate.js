@@ -8,11 +8,10 @@ const BlogTemplate = ({isPublic}) => {
 
 
     const [blogpost, setBlogpost] = useState()
-    const [isLoaded, setIsLoaded] = useState(false)
     const [showModal, setShowModal] = useState(false);
     const [action, setAction] = useState('');
     const [storeId, setStoreId] = useState('')
-
+    const [notification, setNotification] = useState('');
 
 
 
@@ -69,7 +68,7 @@ const BlogTemplate = ({isPublic}) => {
     
         fetchData();
       }
-      }, [blogID,userID]);
+      }, []);
 
 
       const deleteBlog = async (blogID) => {
@@ -79,6 +78,7 @@ const BlogTemplate = ({isPublic}) => {
         window.location.replace('/ownblogs')
 
       }
+
 
       const unpublishBlog = async (blogID) => {
         const blogRef = doc(db, 'allBlogs', blogID);
@@ -116,8 +116,16 @@ const BlogTemplate = ({isPublic}) => {
               datePublished: fDate,
               timePublished: fTime
           });
-          window.location.replace('/blogs')
-          console.log("Data added to Firestore successfully");
+
+          setNotification('Blog published successfully');
+
+          setTimeout(() => {
+            window.location.replace('/blogs');
+          }, 2000);         
+           console.log("Data added to Firestore successfully");
+
+
+
       } catch (error) {
           console.error("Error adding data to Firestore:", error);
       }
@@ -156,6 +164,18 @@ const BlogTemplate = ({isPublic}) => {
         <div >
              
             <div className="m-5">
+
+
+          {/* SUCCESSFUL PUBLISH MESSAGE */}
+          {notification && (
+          <div className="fixed inset-0 z-50 flex items-start mt-10 justify-center overflow-auto">
+            <p className="bg-blue-200 text-black border-2 border-black p-4 rounded-md shadow-md ">
+              {notification}
+            </p>
+          </div>
+        )}
+
+
  
             {blogpost && (
               <div className="">
@@ -187,7 +207,15 @@ const BlogTemplate = ({isPublic}) => {
             </div>
             <ConfirmModal
                 isOpen={showModal}
-                message="Are you sure?"
+                message={
+                  action === 'publish'
+                    ? 'Are you sure you want to publish?'
+                    : action === 'delete'
+                    ? 'Are you sure you want to delete?'
+                    : action === 'unpublish'
+                    ? 'Are you sure you want to unpublish?'
+                    : 'Are you sure?'
+                }
                 onConfirm={() => handleConfirmation(action, storeId)}
                 onCancel={handleCancel}
               />
@@ -202,7 +230,7 @@ const BlogTemplate = ({isPublic}) => {
                     hover:scale-110 duration-300" onClick={()=>handleButtonClick('delete', blogID)}>Delete</button>
             <button className="py-2 px-5 m-2 text-l
                   border-2 border-black rounded-xl hover:bg-slate-300 
-                  hover:scale-110 duration-300">Edit</button>
+                  hover:scale-110 duration-300"><Link to='/editpost'>Edit</Link></button>
             <button className="py-2 px-5 m-2 text-l
                     border-2 border-black rounded-xl hover:bg-slate-300 
                     hover:scale-110 duration-300"><Link to='/ownblogs'>Back</Link></button>
@@ -212,13 +240,13 @@ const BlogTemplate = ({isPublic}) => {
               <div>
                   <button className="py-2 px-5 m-2 text-l
                   border-2 border-black rounded-xl hover:bg-slate-300 
-                  hover:scale-110 duration-300" onClick={()=>unpublishBlog(blogID)}>Unpublish</button>
+                  hover:scale-110 duration-300" onClick={()=>handleButtonClick('unpublish', blogID)}>Unpublish</button>
                   <button className="py-2 px-5 m-2 text-l
                   border-2 border-black rounded-xl hover:bg-slate-300 
                   hover:scale-110 duration-300"><Link to='/ownblogs'>Back</Link></button> 
                   <button className="py-2 px-5 m-2 text-l
                   border-2 border-black rounded-xl hover:bg-slate-300 
-                  hover:scale-110 duration-300">Edit</button>
+                  hover:scale-110 duration-300"><Link to='/editpost'>Edit</Link></button>
                 </div>  
                 // BLOG IS PUBLISHED AND ON PUBLIC BLOGS PAGE
                   :

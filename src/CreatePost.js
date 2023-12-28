@@ -2,7 +2,6 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "./firebaseconfig";
 import { useState } from "react";
 import {v4 as uuidv4} from 'uuid';
-import { Link } from "react-router-dom";
 import ConfirmModal from "./ConfirmModal";
 
 

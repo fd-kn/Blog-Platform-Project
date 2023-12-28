@@ -53,8 +53,8 @@ const OwnBlogs = () => {
 
 
                     newBlogs.sort((a, b) => {
-                      console.log(a.date)
-                      console.log(a.time)
+                      // console.log(a.date)
+                      // console.log(a.time)
                       const [dayA, monthA, yearA] = a.date.split('/');
                       const [hourA, minuteA, secondA] = a.time.split(':');
                     
@@ -65,7 +65,7 @@ const OwnBlogs = () => {
                       const dateTimeA = new Date(yearA, monthA - 1, dayA, hourA, minuteA, secondA);
                       const dateTimeB = new Date(yearB, monthB - 1, dayB, hourB, minuteB, secondB);
 
-                       console.log(dateTimeA)
+                      //  console.log(dateTimeA)
                       return dateTimeB - dateTimeA;
                     });
             
@@ -74,7 +74,7 @@ const OwnBlogs = () => {
                       setPublishedBlogs(newBlogs.filter(blog => blog.isPublished === true));
 
 
-                      console.log(newBlogs);
+                      // console.log(newBlogs);
             })
 
           } catch (error) {
@@ -83,7 +83,7 @@ const OwnBlogs = () => {
         };
     
         fetchData();}
-      }, [userID]);
+      }, []);
 
 
       const handlePostClick = (blogID) => {

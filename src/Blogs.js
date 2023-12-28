@@ -94,7 +94,9 @@ const Blogs = () => {
                     <p>No blogs available.</p>
                     ) : (
                      allblogs.map((blog, index) => (
-                        <div key={index} onClick={()=>handlePostClick(blog.blogID)} className=" w-1/5 m-5 p-5 border-2 solid border-gray-300 rounded-lg 
+                        <div key={index} onClick={()=>handlePostClick(blog.blogID)} 
+                        className=" w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 xl:w-1/6
+                         m-5 p-5 border-2 solid border-gray-300 rounded-lg 
                         hover:scale-110 duration-300">
                             <Link to={`/blogtemplate/${'Published'}`}>
                                 <h1 className="text-3xl pb-4">{blog.title}</h1>

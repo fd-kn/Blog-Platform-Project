@@ -18,6 +18,7 @@
 // Delete public blogs when published blogs are deleted
 //! Provide 'Are you sure?' questions to delete and publish - JS Modals - design them too
 //! Media queries, prioritise mobile layout and check why
+//! Overflowing words when dev tools screen maximised
 // Change to book id rather than titles
 // Adjust text box size
 //! Add images to posts and profile picture

@@ -10,6 +10,7 @@ import SignUp from "./SignUp";
 import CreatePost from "./CreatePost";
 import OwnBlogs from "./OwnBlogs";
 import BlogTemplate from "./BlogTemplate";
+import EditPost from "./EditPost";
 
 
 function App() {
@@ -35,9 +36,10 @@ function App() {
           {/* <Route path="/settings" element={<Settings />} /> */}
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<LogIn />} />
-          <Route path="/ownblogs" element={<OwnBlogs />} />
-          <Route path="/blogtemplate/Published" element={<BlogTemplate isPublic={'Published'} />} />
-          <Route path="/blogtemplate/NotPublished" element={<BlogTemplate isPublic={'NotPublished'}/>} />
+          {(isSignedIn) ? <Route path="/editpost" element={<EditPost />} /> : null}
+          {(isSignedIn) ? <Route path="/ownblogs" element={<OwnBlogs />} /> : null}
+          {(isSignedIn) ? <Route path="/blogtemplate/Published" element={<BlogTemplate isPublic={'Published'} />} /> : null}
+          {(isSignedIn) ? <Route path="/blogtemplate/NotPublished" element={<BlogTemplate isPublic={'NotPublished'}/>} />: null}
 
 
           <Route path="*" element={<NoPage />} />
