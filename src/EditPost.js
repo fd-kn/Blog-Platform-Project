@@ -114,8 +114,8 @@ const EditPost = ({blogId}) => {
 
     return ( 
         <div>
-            <p>{title}</p>
-            <p>{post}</p><form onSubmit={handlePost}>
+
+            <form onSubmit={handlePost}>
 
             <label className='p-2 m-1 italic '>Title</label>
             <div>

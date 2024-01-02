@@ -27,7 +27,7 @@ const CreatePost = () => {
             event.preventDefault();
         }
 
-
+        
         var nameofUser = 'N/A'
 
         const now = new Date();
@@ -85,7 +85,7 @@ const CreatePost = () => {
     return (
         <div className="">
             <h1 className="flex justify-center text-3xl mt-10">Create Blog Post</h1>
-            <div className="flex justify-center mt-10">
+            <div className="p-4 w-4/5 mt-10">
                 <div className="">
                 <form onSubmit={handlePost}>
 
@@ -119,12 +119,17 @@ const CreatePost = () => {
                     <button className="py-2 px-5 m-2 text-l
                     border-2 border-black rounded-xl hover:bg-slate-300 
                     hover:scale-110 duration-300" type="submit">Save Draft</button>
+
                 </form>
 
                 <button className="py-2 px-5 m-2 text-l
                     border-2 border-black rounded-xl hover:bg-slate-300 
-                    hover:scale-110 duration-300"  onClick={()=>setShowModal(true)}>Cancel</button>  {/* onlick go back to blogs page */}
-                {/* ADD onclick above TO SAVE CHANGES IF USER CANCELS */}
+                    hover:scale-110 duration-300" 
+                    onClick={post !=='' || title !== '' ? ()=>setShowModal(true) : () => window.history.back()}>
+                    Cancel</button> 
+
+
+
             </div>
             </div>
         </div> 

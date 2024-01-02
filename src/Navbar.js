@@ -3,11 +3,13 @@ import { auth, db } from "./firebaseconfig";
 import { signOut } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import ConfirmModal from "./ConfirmModal";
 
 const Navbar = () => {
     const location = useLocation();
 
     const [userName, setUserName] = useState()
+    const [showModal, setShowModal] = useState()
 
     var userID;
     if(JSON.parse(localStorage.getItem('userID'))){
@@ -59,6 +61,16 @@ const Navbar = () => {
           });
     }
 
+    const handleButtonClick = () => {
+      setShowModal(true);
+
+    }
+
+    const handleCancel = () => {
+      setShowModal(false);
+    };
+
+
     return ( 
         <div className="border-b-4 border-b-black ">
             {/* <div className="flex justify-center m-5">
@@ -74,12 +86,20 @@ const Navbar = () => {
                          <li className={`float-right pr-12 hover:scale-110 duration-300 ${location.pathname === '/login' ? 'underline' : 'no-underline'}`}><Link to='/login'>Log In</Link></li>
                          <li className={`float-right pr-12 hover:scale-110 duration-300 ${location.pathname === '/signup' ? 'underline' : 'no-underline'}`}><Link to='/signup'>Sign Up</Link></li>
                      </div> : 
-                         <li className={`float-right pr-12 hover:scale-110 duration-300 ${location.pathname === '/signup' ? 'underline' : 'no-underline'}`} onClick={handleLogOut}>Log Out</li>
+                         <li className={`float-right pr-12 hover:scale-110 duration-300 ${location.pathname === '/signup' ? 'underline' : 'no-underline'}`} onClick={handleButtonClick}>Log Out</li>
                      }
                     {/* <li className={`float-right pr-12 hover:scale-110 duration-300 ${location.pathname === '/settings' ? 'underline' : 'no-underline'}`}><Link to='/settings'>Settings</Link></li> */}
                     {/* <li className={`float-right pr-12 hover:scale-110 duration-300 ${location.pathname === '/stories' ? 'underline' : 'no-underline'}`}><Link to='/stories'>Stories</Link></li> */}
                     <li className={`float-right pr-12 hover:scale-110 duration-300 ${location.pathname === '/blogs' ? 'underline' : 'no-underline'}`}><Link to="/blogs">Blogs</Link></li>
                     <li className={`float-right pr-12 hover:scale-110 duration-300 ${location.pathname === '/home' || location.pathname === '/' ? 'underline' : 'no-underline'}`}><Link to="/home">Home</Link></li>
+                
+               <ConfirmModal
+                    isOpen={showModal}
+                    message={'Do you wish to log out?'}
+                    onConfirm={handleLogOut}
+                    onCancel={handleCancel}
+              />
+                
                 </div>
                 
             </ul>
