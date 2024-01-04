@@ -118,10 +118,10 @@ const OwnBlogs = () => {
             <div className="flex flex-wrap justify-start m-5">
                 {blogsToMap.map((blog, index) => (
                     <div key={index} onClick={()=>handlePostClick(blog.blogID)} 
-                    className=" w-1/5 m-5 p-5 border-2 solid border-gray-300 rounded-lg 
+                    className=" w-2/5 m-5 p-5 border-2 solid border-gray-300 rounded-lg 
                     hover:scale-110 duration-300">
                         <Link to={`/blogtemplate/${'NotPublished'}`}>
-                            <h1 className="text-3xl pb-4">{blog.title}</h1>
+                            <h1 className="text-4xl flex justify-center pb-10">{blog.title}</h1>
                             <p>Written by: <b>{blog.author}</b></p>
                             {isDraft ? <p>Date Added: <b>{blog.date}</b></p> : 
                             <div>

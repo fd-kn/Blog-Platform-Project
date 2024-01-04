@@ -10,20 +10,19 @@
 //! Full screen colours
 // Sepearate drafts and published blogs in My Blogs
 // Edit blogs
-//! Allow Save Changes only if changes are made
 //! Make random blog account and check out how they work
 //! Filter blogs
 //! Animations
 //! Loading icon
 //! Icons for buttons
-//! Don't save if content is empty
+// Don't save if content is empty
 // Modal for logging out
 // Change isPublished field if unpublished
 // Add unpublish button which appears if blog is published
 // Add field that checks if blog is published
 // Delete public blogs when published blogs are deleted
 // Provide 'Are you sure?' questions to delete and publish - JS Modals 
-//! Media queries, prioritise mobile layout and check why
+//! Media queries, prioritise mobile layout
 //! Overflowing words when dev tools screen maximised
 // Change to book id rather than titles
 // Adjust text box size

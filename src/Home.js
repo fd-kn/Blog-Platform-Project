@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import skytreesun from "./skytreesun.jpg"
+import { useState } from "react";
 // import { auth, db } from "./firebaseconfig";
 // import { doc, getDoc } from "firebase/firestore";
 // import { useEffect, useState } from "react";
@@ -6,7 +8,7 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
 
-
+    const [selectedImage, setSelectedImage] = useState(null);
     
     var isSignedIn;
     if(JSON.parse(localStorage.getItem('isSignedIn'))){
@@ -15,8 +17,14 @@ const Home = () => {
         isSignedIn = false;
     }
 
+
+    const handleImageUpload = (file) => {
+        // Do something with the selected image file (e.g., set it in state)
+        setSelectedImage(file);
+      };
+
     return ( 
-        <div className="h-screen">
+        <div className="">
             <div className="flex justify-center my-10">
                 <h1 className="text-3xl italic bold underline">Welcome to The Writer's Block!</h1>
             </div>
@@ -34,6 +42,21 @@ const Home = () => {
         {/* {userID ? <p>{user.email}</p> : null} */}
         {/* <p>{userName}</p> */}
 
+        <div className="flex justify-center">
+            <img className="mt-4" src={skytreesun} alt="Example Image" />
+        </div>
+
+        <input
+        type="file"
+        accept="image/*"
+        onChange={(e) => handleImageUpload(e.target.files[0])}
+      />
+      {selectedImage && (
+        <div>
+          <h2>Preview:</h2>
+          <img src={URL.createObjectURL(selectedImage)} alt="Selected" />
+        </div>
+      )}
 
         </div>
      );

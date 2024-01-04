@@ -70,8 +70,8 @@ const Blogs = () => {
 
 
     return ( 
-        <div className="h-screen">
-        <div className=" m-10 mt-20">
+        <div className="pb-10">
+        <div className="mt-20">
             
             <div>
             {isSignedIn && isLoaded && (
@@ -95,11 +95,11 @@ const Blogs = () => {
                     ) : (
                      allblogs.map((blog, index) => (
                         <div key={index} onClick={()=>handlePostClick(blog.blogID)} 
-                        className=" w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 xl:w-1/6
+                        className="w-2/5 sm:w-1/3 md:w-1/4 lg:w-2/5 xl:w-2/6
                          m-5 p-5 border-2 solid border-gray-300 rounded-lg 
                         hover:scale-110 duration-300">
                             <Link to={`/blogtemplate/${'Published'}`}>
-                                <h1 className="text-3xl pb-4">{blog.title}</h1>
+                                <h1 className="text-4xl flex justify-center pb-10">{blog.title}</h1>
                                 <p>Written by: <b>{blog.author}</b></p>
                                 <p>Date Published: <b>{blog.date}</b></p>
                             </Link>

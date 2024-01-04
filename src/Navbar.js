@@ -80,7 +80,7 @@ const Navbar = () => {
                 <h1 className="float-left pl-3 text-3xl hover:scale-110 duration-300"><Link to="/home">The Writer's Block</Link></h1>
                 <div className="pt-2"> 
                     
-                    <li className='float-right pr-12 hover:scale-110 duration-300 text-orange-400'>{userName}</li>
+                    <li className={`float-right pr-12 hover:scale-110 duration-300 text-orange-400 ${location.pathname === '/profile' ? 'underline' : 'no-underline'}`}><Link to='/profile'>{userName}</Link></li>
                     {!(isSignedIn) ?
                     <div>
                          <li className={`float-right pr-12 hover:scale-110 duration-300 ${location.pathname === '/login' ? 'underline' : 'no-underline'}`}><Link to='/login'>Log In</Link></li>
