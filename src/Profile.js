@@ -62,6 +62,15 @@ const Profile = () => {
                 await updateDoc(blogRef, { userName: userName }, { merge: true });
             });
 
+            const publicblogsQuery = query(collection(db, "publicBlogs"), where("id", "==", userID));
+            const publicblogDocsSnapshot = await getDocs(publicblogsQuery);
+
+            publicblogDocsSnapshot.docs.forEach(async (blogDoc) => {
+
+                const publicblogRef = doc(db, "publicBlogs", blogDoc.id);
+                await updateDoc(publicblogRef, { userName: userName }, { merge: true });
+            });
+
             setEditingUsername(false);
             window.location.reload();
 
@@ -91,27 +100,26 @@ const Profile = () => {
                     {editingUsername ? <button onClick={()=> setEditingUsername(false)}>Cancel</button> : null}
                 </div>
             </div>
-
-            <div className="flex justify-center mt-5">
-                <input
-                    type="file"
-                    accept="image/*"
-                    onChange={(e) => handleImageUpload(e.target.files[0])}
-                    id="imageInput"
-                    className="inset-0  opacity-0 cursor-pointer"
-                />
-                <label
-                    htmlFor="imageInput"
-                    className="cursor-pointer bg-blue-200 hover:bg-blue-600 p-2 rounded-lg"
-                >
-                    Upload Image
-                </label>
+            <div className="m-5">
+                <div>
+                    <input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => handleImageUpload(e.target.files[0])}
+                        id="imageInput"
+                        className="inset-0  opacity-0 cursor-pointer"
+                    />
+                    <label htmlFor="imageInput" 
+                        className="cursor-pointer bg-blue-200 hover:bg-blue-600 p-2 rounded-lg">
+                        Upload Image
+                    </label>
+                </div>
             </div>
 
 
                 {selectedImage && (
-                    <div>
-                        <h2>Preview:</h2>
+                    <div className="flex justify-center">
+                        
                         <img className='h-36 w-36 rounded-full'
                         src={URL.createObjectURL(selectedImage)} alt="Selected" />
                     </div>
