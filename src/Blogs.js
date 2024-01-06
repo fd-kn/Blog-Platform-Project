@@ -31,7 +31,9 @@ const Blogs = () => {
                         author: doc.data().userName,
                         date: doc.data().datePublished,
                         time: doc.data().timePublished,
-                        blogID: doc.data().blogID
+                        blogID: doc.data().blogID,
+                        profileImage: doc.data().profileImage,
+                        edited: doc.data().edited
                     }
                     newBlogs.push(blogDetails);
                     });
@@ -53,7 +55,6 @@ const Blogs = () => {
                       });
             
                       setAllblogs(newBlogs);
-                      console.log(newBlogs);
                       setIsLoaded(true);
             })
 

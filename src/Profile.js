@@ -5,7 +5,7 @@ import { db } from "./firebaseconfig";
 const Profile = () => {
     const [selectedImage, setSelectedImage] = useState(null);
     const [userName, setUserName] = useState('');
-    const [editingUsername, setEditingUsername] = useState(false); // State to manage the edit mode
+    const [editingUsername, setEditingUsername] = useState(false);
 
     var userID;
 
@@ -73,7 +73,7 @@ const Profile = () => {
 
     return (
         <div>
-            <p className="flex justify-center pt-5">
+            <div className="flex justify-center pt-5">
                 {editingUsername ? (
                     <input
                         className="rounded p-1 mr-2 bg-blue-200"
@@ -90,19 +90,33 @@ const Profile = () => {
                     </button>
                     {editingUsername ? <button onClick={()=> setEditingUsername(false)}>Cancel</button> : null}
                 </div>
-            </p>
+            </div>
 
-            <input
-                type="file"
-                accept="image/*"
-                onChange={(e) => handleImageUpload(e.target.files[0])}
-            />
-            {selectedImage && (
-                <div>
-                    <h2>Preview:</h2>
-                    <img src={URL.createObjectURL(selectedImage)} alt="Selected" />
-                </div>
-            )}
+            <div className="flex justify-center mt-5">
+                <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => handleImageUpload(e.target.files[0])}
+                    id="imageInput"
+                    className="inset-0  opacity-0 cursor-pointer"
+                />
+                <label
+                    htmlFor="imageInput"
+                    className="cursor-pointer bg-blue-200 hover:bg-blue-600 p-2 rounded-lg"
+                >
+                    Upload Image
+                </label>
+            </div>
+
+
+                {selectedImage && (
+                    <div>
+                        <h2>Preview:</h2>
+                        <img className='h-36 w-36 rounded-full'
+                        src={URL.createObjectURL(selectedImage)} alt="Selected" />
+                    </div>
+                )}
+            
         </div>
     );
 };

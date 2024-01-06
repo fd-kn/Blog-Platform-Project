@@ -61,7 +61,9 @@ const CreatePost = () => {
                 timeAdded: fTime,
                 datePublished: 0,
                 timePublished: 0,
-                isPublished: false
+                isPublished: false,
+                profileImage:'',
+                edited: false
             });
             window.location.replace('/ownblogs')
             console.log("Data added to Firestore successfully");

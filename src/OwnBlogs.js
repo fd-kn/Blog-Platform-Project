@@ -45,7 +45,9 @@ const OwnBlogs = () => {
                         blogID: doc.data().blogID,
                         datePublished: doc.data().datePublished,
                         timePublished: doc.data().timePublished,
-                        isPublished: doc.data().isPublished
+                        isPublished: doc.data().isPublished,
+                        profileImage: doc.data().profileImage,
+                        edited: doc.data().edited
                     }
                     newBlogs.push(blogDetails);
                     });

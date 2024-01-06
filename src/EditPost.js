@@ -1,4 +1,4 @@
-import { collection, doc, getDoc, getDocs, query, setDoc, where } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, query, setDoc, updateDoc, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "./firebaseconfig";
 import { Link } from "react-router-dom";
@@ -85,23 +85,14 @@ const EditPost = ({blogId}) => {
             const queryRef = query(collection(db, 'allBlogs'), where('blogID', "==", blogID));
             const querySnapshot = await getDocs(queryRef);
             if (!querySnapshot.empty) {
-              const blogDoc = querySnapshot.docs[0];
+            //   const blogDoc = querySnapshot.docs[0];
 
-            await setDoc(doc(db, "allBlogs", blogID), {
+              const docRef = doc(db, "allBlogs", blogID);
+              await updateDoc(docRef, {
                 title: title,
                 post: post.split('\n'),
-                id: userID,
-                userName: nameofUser,
-                blogID: blogDoc.data().blogID,
-                dateAdded: blogDoc.data().dateAdded,
-                timeAdded: blogDoc.data().timeAdded,
-                datePublished: blogDoc.data().datePublished,
-                timePublished: blogDoc.data().timePublished,
-                isPublished: blogDoc.data().isPublished,
- 
-                //ADD LAST EDITED DATE - ALSO ADD THAT A BLOG HAS BEEN EDITED
-
-            });
+                edited: true
+            }, { merge: true });
         }
             window.location.replace('/ownblogs')
             console.log('saved ')

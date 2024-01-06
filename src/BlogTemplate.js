@@ -194,12 +194,12 @@ const BlogTemplate = ({isPublic}) => {
                 }
                 </div>
 
-                  <p className=" text-xl p-10">
+                  <div className=" text-xl p-10">
                     {Array.isArray(blogpost.post) ? 
                     blogpost.post.map((postItem, index) => (
                     <p key={index}>{postItem}</p> 
                     )) : blogpost.post }
-                  </p>
+                  </div>
 
 
               </div>
