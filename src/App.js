@@ -12,7 +12,7 @@ import OwnBlogs from "./OwnBlogs";
 import BlogTemplate from "./BlogTemplate";
 import EditPost from "./EditPost";
 import Profile from "./Profile";
-
+import skytreesun from "./skytreesun.jpg"
 
 function App() {
 
@@ -24,9 +24,11 @@ function App() {
   }
 
   return (
-    <div className="h-full">
+    // <div className="bg-gradient-to-br from-purple-400 via-red-200 to-blue-300">
+    <div className="bg-blue-200">
+
     <BrowserRouter>
-    <div className="bg-gradient-to-br from-purple-400 via-red-200 to-blue-300 ">
+    <div className=" ">
     <Navbar />
       <Routes>
         <Route>
@@ -40,7 +42,7 @@ function App() {
           {(isSignedIn) ? <Route path="/profile" element={<Profile />} /> : null}
           {(isSignedIn) ? <Route path="/editpost" element={<EditPost />} /> : null}
           {(isSignedIn) ? <Route path="/ownblogs" element={<OwnBlogs />} /> : null}
-          {(isSignedIn) ? <Route path="/blogtemplate/Published" element={<BlogTemplate isPublic={'Published'} />} /> : null}
+          <Route path="/blogtemplate/Published" element={<BlogTemplate isPublic={'Published'} />} />
           {(isSignedIn) ? <Route path="/blogtemplate/NotPublished" element={<BlogTemplate isPublic={'NotPublished'}/>} />: null}
 
 

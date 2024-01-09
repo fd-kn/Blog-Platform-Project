@@ -10,11 +10,17 @@
 //! Full screen colours
 // Sepearate drafts and published blogs in My Blogs
 // Edit blogs
-//! Make random blog account and check out how they work
+//Make random blog account and check out how they work
+//! Check out other sites for designs
 //! Filter blogs
 //! Animations
 //! Loading icon
 //! Icons for buttons
+//! Default profile picture
+//! Email change
+//! Check if email is valid?
+//! Google sign in
+//! Dropdown menu when hovering above profile picture
 // Don't save if content is empty
 // Modal for logging out
 // Change isPublished field if unpublished
@@ -26,8 +32,7 @@
 //! Overflowing words when dev tools screen maximised
 // Change to book id rather than titles
 // Adjust text box size
-//! Add images to posts and profile picture
+//! Add images to posts
 //! Profile settings
 //! Add B I U and font colours
-//! Dropdown menu when hovering above profile picture
 //! Comments and likes

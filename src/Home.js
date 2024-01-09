@@ -8,7 +8,6 @@ import { useState } from "react";
 
 const Home = () => {
 
-    const [selectedImage, setSelectedImage] = useState(null);
     
     var isSignedIn;
     if(JSON.parse(localStorage.getItem('isSignedIn'))){
@@ -18,10 +17,6 @@ const Home = () => {
     }
 
 
-    const handleImageUpload = (file) => {
-        // Do something with the selected image file (e.g., set it in state)
-        setSelectedImage(file);
-      };
 
     return ( 
         <div className="">
@@ -37,26 +32,19 @@ const Home = () => {
                 </p>
                 {(!isSignedIn) ? <button className="py-4 px-10 m-10 text-2xl
                  border-2 border-black rounded-3xl hover:bg-slate-300 
-                 hover:scale-110 duration-300"><Link to='/signup'>Sign up now!</Link></button> : null}
+                 hover:scale-110 duration-300"><Link to='/signup'>Sign up now!</Link></button> 
+                 : 
+                 <button className="py-4 px-10 m-10 text-2xl
+                 border-2 border-black rounded-3xl hover:bg-slate-300 
+                 hover:scale-110 duration-300"><Link to='/createpost'>Start writing!</Link></button>}
             </div>
         {/* {userID ? <p>{user.email}</p> : null} */}
         {/* <p>{userName}</p> */}
 
         <div className="flex justify-center">
-            <img className="mt-4" src={skytreesun} alt="Example Image" />
+            <img className="m-6" src={skytreesun} alt="Example Image" />
         </div>
 
-        <input
-        type="file"
-        accept="image/*"
-        onChange={(e) => handleImageUpload(e.target.files[0])}
-      />
-      {selectedImage && (
-        <div>
-          <h2>Preview:</h2>
-          <img src={URL.createObjectURL(selectedImage)} alt="Selected" />
-        </div>
-      )}
 
         </div>
      );

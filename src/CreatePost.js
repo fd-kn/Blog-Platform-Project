@@ -62,7 +62,6 @@ const CreatePost = () => {
                 datePublished: 0,
                 timePublished: 0,
                 isPublished: false,
-                profileImage:'',
                 edited: false
             });
             window.location.replace('/ownblogs')

@@ -32,7 +32,6 @@ const Blogs = () => {
                         date: doc.data().datePublished,
                         time: doc.data().timePublished,
                         blogID: doc.data().blogID,
-                        profileImage: doc.data().profileImage,
                         edited: doc.data().edited
                     }
                     newBlogs.push(blogDetails);
@@ -90,6 +89,7 @@ const Blogs = () => {
                 </div>
             )}
             
+            <h3 className="m-4 text-2xl">Check out some blogs!</h3>
                 <div className="flex flex-wrap justify-start m-5">
                 {allblogs.length === 0 && isLoaded ? (
                     <p>No blogs available.</p>

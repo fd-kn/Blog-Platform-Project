@@ -106,7 +106,7 @@ const BlogTemplate = ({isPublic}) => {
         const blogRef = doc(db, 'allBlogs', blogID);
         try {
 
-          await updateDoc(blogRef, { datePublished: fDate, timePublished: fTime, isPublished: true });
+          await updateDoc(blogRef, { datePublished: fDate, timePublished: fTime, isPublished: true }, { merge: true });
           await setDoc(doc(db, "publicBlogs", blogID), {
               title: blogpost.title,
               post: blogpost.post,
@@ -161,7 +161,7 @@ const BlogTemplate = ({isPublic}) => {
 
 
     return ( 
-        <div >
+        <div className="h-screen">
              
             <div className="m-5">
 
@@ -194,7 +194,7 @@ const BlogTemplate = ({isPublic}) => {
                 }
                 </div>
 
-                  <div className=" text-xl p-10">
+                  <div className=" text-xl p-10 flex justify-center">
                     {Array.isArray(blogpost.post) ? 
                     blogpost.post.map((postItem, index) => (
                     <p key={index}>{postItem}</p> 

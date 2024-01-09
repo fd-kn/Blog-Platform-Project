@@ -28,7 +28,9 @@ const SignUp = () => {
             try {
                 await setDoc(doc(db, "users", user.uid), {
                   userName: newName,
-                  email: newEmail
+                  email: newEmail,
+                  profileImage: ''
+                  //ADD PROFILE IMAGE STUFF HERE
                 });
               
                 // Data added successfully
