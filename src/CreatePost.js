@@ -1,8 +1,9 @@
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import { db } from "./firebaseconfig";
+import { db, storage } from "./firebaseconfig";
 import { useState } from "react";
 import {v4 as uuidv4} from 'uuid';
 import ConfirmModal from "./ConfirmModal";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 
 
@@ -11,6 +12,7 @@ const CreatePost = () => {
     const [title, setTitle] = useState('')
     const [post, setPost] = useState('')
     const [showModal, setShowModal] = useState(false);
+    const [selectedImage, setSelectedImage] = useState();
 
 
     var userID;
@@ -62,7 +64,8 @@ const CreatePost = () => {
                 datePublished: 0,
                 timePublished: 0,
                 isPublished: false,
-                edited: false
+                edited: false,
+                image: selectedImage //! ADD THIS TO ALL OTHER PAGES AND DISPLAY THIS
             });
             window.location.replace('/ownblogs')
             console.log("Data added to Firestore successfully");
@@ -81,11 +84,28 @@ const CreatePost = () => {
 
           };    
 
+        const handleImageUpload = async (file) => {
+            //! Save to new folder in storage - like blog posts - with blog id
+            //! Add the saving of the image once the post has been created
+            //! Just store the url into an image state from here to display it here
+
+            try{
+                const storageRef = ref(storage, `tempPostImages/${userID}/${file.name}`);
+                await uploadBytes(storageRef, file);
+                const downloadURL = await getDownloadURL(storageRef);
+                setSelectedImage(downloadURL);
+            }catch(error){
+                console.error("Error uploading preview image", error);
+    
+            }
+
+        }
+
 
 
     return (
         <div className="">
-            <h1 className="flex justify-center text-3xl mt-10">Create Blog Post</h1>
+            <h1 className="flex justify-center text-3xl pt-10">Create Blog Post</h1>
             <div className="p-4 w-4/5 mt-10">
                 <div className="">
                 <form onSubmit={handlePost}>
@@ -99,6 +119,28 @@ const CreatePost = () => {
                     </div>
 
                     {/* MAKE TEXTAREA BIGGER */}
+                    <label className="p-2 m-1 italic">Add Image</label>
+                    <div>
+                    <input 
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => handleImageUpload(e.target.files[0])}
+                        id="imageInput"
+                        className="absolute opacity-0 w-0 h-0 overflow-hidden"
+                        
+                    />
+                    <label htmlFor="imageInput" 
+                        className="hover:scale-110 duration-300 cursor-pointer bg-blue-200 hover:bg-blue-400 p-2 rounded-lg">
+                        Upload Image
+                    </label>
+                    </div>
+
+                    {selectedImage && (
+                    <div className="flex justify-center p-5">
+                        <img className='h-36 w-36 rounded-full border-4 border-black'
+                        src={selectedImage} alt="Selected" />
+                    </div>
+                )}
 
                     <label className='p-2 m-1 italic '>Post</label>
                     <div className=" pb-4"> 

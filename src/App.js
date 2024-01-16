@@ -12,7 +12,7 @@ import OwnBlogs from "./OwnBlogs";
 import BlogTemplate from "./BlogTemplate";
 import EditPost from "./EditPost";
 import Profile from "./Profile";
-import skytreesun from "./skytreesun.jpg"
+// import skytreesun from "./skytreesun.jpg"
 
 function App() {
 
@@ -23,12 +23,14 @@ function App() {
       isSignedIn = false;
   }
 
+ 
+
   return (
     // <div className="bg-gradient-to-br from-purple-400 via-red-200 to-blue-300">
-    <div className="bg-blue-200">
+    <div className="bg-home">
 
     <BrowserRouter>
-    <div className=" ">
+    <div >
     <Navbar />
       <Routes>
         <Route>

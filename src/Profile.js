@@ -1,7 +1,8 @@
-import { collection, doc, getDoc, getDocs, query, setDoc, updateDoc, where } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, query, updateDoc, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db, storage } from "./firebaseconfig";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { deleteObject, getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import defaultIcon from './defaulticon.jpg'
 
 const Profile = () => {
     const [selectedImage, setSelectedImage] = useState(null);
@@ -11,6 +12,7 @@ const Profile = () => {
     const [tempUserName, setTempUserName] = useState('');
     const [imageChange, setImageChange] = useState(false)
     const [ogImage, setOgImage] = useState(null)
+    const [email, setEmail] = useState('')
 
 
 
@@ -36,8 +38,11 @@ const Profile = () => {
                 
                 if (docSnap.exists()) {
                     setUserName(docSnap.data().userName);
+                    setEmail(docSnap.data().email);
                     if(docSnap.data().profileImage){
                         setSelectedImage(docSnap.data().profileImage);
+                    }else{
+                        setSelectedImage(defaultIcon)
                     }
                 } else {
                     setUserName('');
@@ -74,6 +79,9 @@ const Profile = () => {
     const handleSaveUsername = async () => {
         try {
 
+            if(tempUserName.trim() === '') {
+                return null
+            }
             const docRef = doc(db, "users", userID);
             await updateDoc(docRef, {userName:tempUserName }, { merge: true });
 
@@ -130,19 +138,35 @@ const Profile = () => {
         setSelectedImage(ogImage)
     }
 
+    const deleteImage = async () => {
+        try {
+        //   const storageRef = ref(storage, `profileImages/${userID}`);
+        //   await deleteObject(storageRef);
+    
+          // Update the user's document in Firestore to remove the profileImage field
+          const docRef = doc(db, "users", userID);
+          await updateDoc(docRef, { profileImage: '' }, { merge: true });
+    
+          // Reload the page to reflect the changes
+          window.location.reload();
+        } catch (error) {
+          console.error("Error deleting image:", error);
+        }
+      }
+
     return (
-        <div className="h-screen">
+        <div className="bg-gradient-to-br from-blue-200 via-purple-400 to-blue-200 min-h-screen">
 
             {selectedImage && (
-                    <div className="flex justify-center m-5">
-                        <img className='h-36 w-36 rounded-full'
+                    <div className="flex justify-center p-5">
+                        <img className='h-36 w-36 rounded-full border-4 border-black'
                         src={selectedImage} alt="Selected" />
                     </div>
                 )}
 
-            <div className="m-5">
+            <div className="p-5">
                 <div className="flex justify-center">
-                    <input
+                    <input 
                         type="file"
                         accept="image/*"
                         onChange={(e) => handleImageUpload(e.target.files[0])}
@@ -151,43 +175,58 @@ const Profile = () => {
                         
                     />
                     <label htmlFor="imageInput" 
-                        className=" cursor-pointer bg-blue-200 hover:bg-blue-600 p-2 rounded-lg">
+                        className="hover:scale-110 duration-300 cursor-pointer bg-blue-200 hover:bg-blue-400 p-2 rounded-lg">
                         Upload Image
                     </label>
+
+                    <button onClick={deleteImage} className=" hover:scale-110 duration-300 cursor-pointer bg-blue-200 hover:bg-blue-400 p-2 rounded-lg ml-4">Remove Image</button>
+
                 </div>
+
 
                 {imageChange && (
                             <div className="flex justify-center">
-                                <button className='p-2' onClick={imageSave}>Save Picture</button>
-                                <button className='p-2' onClick={cancelSave}>Cancel</button>
+                                <button className='p-2 hover:scale-110 duration-300' onClick={imageSave}>Save Picture</button>
+                                <button className='p-2 hover:scale-110 duration-300' onClick={cancelSave}>Cancel</button>
                             </div>
                         )}
             </div>
 
 
             <div className="flex justify-center pt-5">
-            <div className="p-2">Username: </div>
-                {editingUsername ? (
-                    <div>
-                    <input
-                        className="rounded px-3 py-1 mr-2 border-2 border-black bg-blue-200"
-                        type="text"
-                        value={tempUserName}
-                        onChange={(e) => setTempUserName(e.target.value)}
-                    />  
+                <div className="pr-2">Username: </div>
+                    {editingUsername ? (
+                        <div>
+                        <div>
+                        <input 
+                            required
+                            className="rounded pl-1  mr-2 border-2 border-black bg-blue-200"
+                            type="text"
+                            value={tempUserName}
+                            onChange={(e) => setTempUserName(e.target.value)}
+                        />  
+                        </div>
+                         {tempUserName.trim() === '' && (
+                            <span className="text-red-500">Username is required</span>
+                        )}
+                        </div>
+                    ) : (
+                        <span className="pr-6"> {tempUserName}</span>
+                    )}
+                    <div className="">
+                        <button className='hover:scale-110 duration-300 cursor-pointer bg-blue-200 hover:bg-blue-400
+                         px-3 py-1 rounded-lg ' onClick={editingUsername ? handleSaveUsername : handleEditUsername}>
+                            {editingUsername ? ':)' : 'Edit'}
+                        </button>
+                        {editingUsername ? <button className='hover:scale-110 duration-300 cursor-pointer bg-blue-200 hover:bg-blue-400
+                         px-3 py-1 rounded-lg ml-2 'onClick={handleCancelEdit}>X</button> : null}
                     </div>
-                ) : (
-                    <span className="rounded px-3 py-1 mr-2 border-2 border-black bg-blue-200">{tempUserName}</span>
-                )}
-                <div className="">
-                    <button className='mr-2 p-2' onClick={editingUsername ? handleSaveUsername : handleEditUsername}>
-                        {editingUsername ? 'Save' : 'Edit'}
-                    </button>
-                    {editingUsername ? <button onClick={handleCancelEdit}>Cancel</button> : null}
-                </div>
             </div>
-            
+            <div className="flex justify-center pt-5">
+                <p className="pr-2">Email:</p> {email}
+            </div>
         </div>
+        //! ANIMATION STUFF? hover:-translate-x-10 duration-300
     );
 };
 

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import skytreesun from "./skytreesun.jpg"
-import { useState } from "react";
+import  skytreesun  from "./skytreesun.jpg"
+
 // import { auth, db } from "./firebaseconfig";
 // import { doc, getDoc } from "firebase/firestore";
 // import { useEffect, useState } from "react";
@@ -19,8 +19,8 @@ const Home = () => {
 
 
     return ( 
-        <div className="">
-            <div className="flex justify-center my-10">
+        <div className="bg-home min-h-screen">
+            <div className="flex justify-center p-10">
                 <h1 className="text-3xl italic bold underline">Welcome to The Writer's Block!</h1>
             </div>
             <div className='text-center mx-auto w-1/2'>
@@ -42,7 +42,7 @@ const Home = () => {
         {/* <p>{userName}</p> */}
 
         <div className="flex justify-center">
-            <img className="m-6" src={skytreesun} alt="Example Image" />
+            <img className="p-5" src={skytreesun} alt="Example" />
         </div>
 
 

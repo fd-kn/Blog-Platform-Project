@@ -18,7 +18,7 @@ const BlogTemplate = ({isPublic}) => {
     var blogID;
     if(JSON.parse(localStorage.getItem('blogID'))){
         blogID = JSON.parse(localStorage.getItem('blogID'));
-        console.log(isPublic)
+        // console.log(isPublic)
     } else{
         blogID = '';
     }
@@ -51,7 +51,8 @@ const BlogTemplate = ({isPublic}) => {
                         userID: userID,
                         isPublished: doc.data().isPublished,
                         datePublished: doc.data().datePublished,
-                        timePublished: doc.data().timePublished                    
+                        timePublished: doc.data().timePublished,
+                        blogImage: doc.data().blogImage                    
 
                       };
                     setBlogpost(blogDetails);
@@ -68,7 +69,7 @@ const BlogTemplate = ({isPublic}) => {
     
         fetchData();
       }
-      }, []);
+      });
 
 
       const deleteBlog = async (blogID) => {
@@ -163,7 +164,7 @@ const BlogTemplate = ({isPublic}) => {
     return ( 
         <div className="h-screen">
              
-            <div className="m-5">
+            <div className="p-5">
 
 
           {/* SUCCESSFUL PUBLISH MESSAGE */}

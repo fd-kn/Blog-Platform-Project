@@ -4,11 +4,13 @@ import { signOut } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import ConfirmModal from "./ConfirmModal";
+import defaultIcon from './defaulticon.jpg'
+
 
 const Navbar = () => {
     const location = useLocation();
 
-    const [userName, setUserName] = useState()
+    // const [userName, setUserName] = useState()
     const [showModal, setShowModal] = useState()
     const [image, setImage] = useState()
 
@@ -29,13 +31,15 @@ const Navbar = () => {
             
     
             if (docSnap.exists()) {
-              console.log("Username:", docSnap.data().userName);
-              setUserName(docSnap.data().userName);
-              setImage(docSnap.data().profileImage)
-
+              // setUserName(docSnap.data().userName);
+              if(docSnap.data().profileImage){
+                setImage(docSnap.data().profileImage);
+            } else {
+                setImage(defaultIcon)
+            }
             } else {
               console.log("No such document!");
-              setUserName('');
+              // setUserName('');
             }
           } catch (error) {
             console.error("Error fetching data:", error);
@@ -75,7 +79,7 @@ const Navbar = () => {
 
 
     return ( 
-        <div className="border-b-4 border-b-black ">
+        <div className="border-b-2 border-b-black bg-gradient-to-r from-blue-400 via-blue-300 to-blue-200">
             {/* <div className="flex justify-center m-5">
                 <h1 className="text-3xl">The Writer's Block</h1>
             </div> */}
@@ -88,7 +92,7 @@ const Navbar = () => {
                          <li className={`float-right pr-12 hover:scale-110 duration-300 ${location.pathname === '/signup' ? 'underline' : 'no-underline'}`}><Link to='/signup'>Sign Up</Link></li>
                      </div> : 
                      <div>
-                       <Link to='/profile'><img src={image} className='hover:scale-110 duration-300 float-right h-8 w-8  rounded-full' alt='profile image'></img></Link>  
+                       <Link to='/profile'><img src={image} className='hover:scale-110 duration-300 float-right h-8 w-8  rounded-full' alt='profile'></img></Link>  
                         {/* <li className={`float-right  hover:scale-110 duration-300 text-orange-400 ${location.pathname === '/profile' ? 'underline' : 'no-underline'}`}><Link to='/profile'>{userName}</Link></li> */}
                          <li className={`float-right pr-12 hover:scale-110 duration-300 ${location.pathname === '/signup' ? 'underline' : 'no-underline'}`} onClick={handleButtonClick}>Log Out</li>
                      </div>

@@ -104,11 +104,11 @@ const EditPost = ({blogId}) => {
 
 
     return ( 
-        <div>
+        <div className="h-screen">
 
             <form onSubmit={handlePost}>
 
-            <label className='p-2 m-1 italic '>Title</label>
+            <label className='p-2  italic '>Title</label>
             <div>
                 <input className="p-2 bg-transparent border-2 border-gray-300 rounded-md text-xl m-2 mb-4"  
                 required placeholder='Enter blog title...' value={title}

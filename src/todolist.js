@@ -7,20 +7,22 @@
 // Show published time for blog template if blog is published 
 //Add published field for each blog 
 // Show public blogs if user is not signed in
-//! Full screen colours
+// Full screen colours
 // Sepearate drafts and published blogs in My Blogs
 // Edit blogs
 //Make random blog account and check out how they work
+//! ANNOTATE ENTIRE CODE SO I CAN COME BACK TO IT
 //! Check out other sites for designs
 //! Filter blogs
 //! Animations
 //! Loading icon
 //! Icons for buttons
-//! Default profile picture
+// Default profile picture
 //! Email change
 //! Check if email is valid?
 //! Google sign in
 //! Dropdown menu when hovering above profile picture
+//! Public profile page
 // Don't save if content is empty
 // Modal for logging out
 // Change isPublished field if unpublished
@@ -33,6 +35,6 @@
 // Change to book id rather than titles
 // Adjust text box size
 //! Add images to posts
-//! Profile settings
+// Profile settings
 //! Add B I U and font colours
 //! Comments and likes

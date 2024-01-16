@@ -21,10 +21,12 @@ const Blogs = () => {
         const fetchData = async () => {
           try {
             const queryRef = query(collection(db, 'publicBlogs'));
-            getDocs(queryRef)
+            await getDocs(queryRef)
             .then((querySnapshot) => {
                 const newBlogs = [];
                 querySnapshot.forEach((doc) => {
+                    // console.log('hello')
+                    // console.log(doc.data().userName)
                     const blogDetails = {
                         title: doc.data().title,
                         post: doc.data().post,
@@ -70,8 +72,8 @@ const Blogs = () => {
 
 
     return ( 
-        <div className="pb-10">
-        <div className="mt-20">
+        <div className=" p-10 min-h-screen">
+        <div className="">
             
             <div>
             {isSignedIn && isLoaded && (
@@ -90,13 +92,13 @@ const Blogs = () => {
             )}
             
             <h3 className="m-4 text-2xl">Check out some blogs!</h3>
-                <div className="flex flex-wrap justify-start m-5">
+                <div className="flex flex-wrap justify-start">
                 {allblogs.length === 0 && isLoaded ? (
                     <p>No blogs available.</p>
                     ) : (
                      allblogs.map((blog, index) => (
                         <div key={index} onClick={()=>handlePostClick(blog.blogID)} 
-                        className="w-2/5 sm:w-1/3 md:w-1/4 lg:w-2/5 xl:w-2/6
+                        className="w-4/5 sm:w-4/5 md:w-4/5 lg:w-2/5 xl:w-2/6
                          m-5 p-5 border-2 solid border-gray-300 rounded-lg 
                         hover:scale-110 duration-300">
                             <Link to={`/blogtemplate/${'Published'}`}>
