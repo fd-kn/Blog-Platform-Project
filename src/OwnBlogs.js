@@ -46,7 +46,8 @@ const OwnBlogs = () => {
                         datePublished: doc.data().datePublished,
                         timePublished: doc.data().timePublished,
                         isPublished: doc.data().isPublished,
-                        edited: doc.data().edited
+                        edited: doc.data().edited,
+                        blogImage: doc.data().blogImage
                     }
                     newBlogs.push(blogDetails);
                     });
@@ -122,6 +123,7 @@ const OwnBlogs = () => {
                       className=" w-2/5 m-5 p-5 border-2 solid border-gray-300 rounded-lg 
                       hover:scale-110 duration-300">
                           <Link to={`/blogtemplate/${'NotPublished'}`}>
+                              <img className="h-32 w-32" src={blog.blogImage} alt="nooo" />
                               <h1 className="text-4xl flex justify-center pb-10">{blog.title}</h1>
                               <p>Written by: <b>{blog.author}</b></p>
                               {isDraft ? <p>Date Added: <b>{blog.date}</b></p> : 

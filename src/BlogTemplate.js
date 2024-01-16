@@ -182,20 +182,24 @@ const BlogTemplate = ({isPublic}) => {
               <div className="">
                 <h1 className="flex justify-center text-7xl pb-4">{blogpost.title}</h1>
                 <div className="flex">
-                <p className="text-sm mr-6">Written by: <b>{blogpost.author}</b></p>
+                      <p className="text-sm mr-6">Written by: <b>{blogpost.author}</b></p>
 
-                {isPublic === 'NotPublished' && blogpost.isPublished === true ?
-                <div>
-                  <p className="text-sm">Date Added: <b>{blogpost.date}</b></p>
-                  <p className="text-sm">Date Published: <b>{blogpost.datePublished}</b></p>
-                  </div> :
-                  isPublic === 'NotPublished' && blogpost.isPublished === false ?
-                  <p className="text-sm">Date Added: <b>{blogpost.date}</b></p>:
-                  <p className="text-sm">Date Published: <b>{blogpost.datePublished}</b></p>
-                }
+                      {isPublic === 'NotPublished' && blogpost.isPublished === true ?
+                      <div>
+                        <p className="text-sm">Date Added: <b>{blogpost.date}</b></p>
+                        <p className="text-sm">Date Published: <b>{blogpost.datePublished}</b></p>
+                        </div> :
+                        isPublic === 'NotPublished' && blogpost.isPublished === false ?
+                        <p className="text-sm">Date Added: <b>{blogpost.date}</b></p>:
+                        <p className="text-sm">Date Published: <b>{blogpost.datePublished}</b></p>
+                      }
                 </div>
+                <div className="flex justify-center">
+                <img className="h-60 w-96" src={blogpost.blogImage} alt="nooo" />
 
+                </div>
                   <div className=" text-xl p-10 flex justify-center">
+                  
                     {Array.isArray(blogpost.post) ? 
                     blogpost.post.map((postItem, index) => (
                     <p key={index}>{postItem}</p> 

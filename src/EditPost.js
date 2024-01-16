@@ -91,6 +91,7 @@ const EditPost = ({blogId}) => {
               await updateDoc(docRef, {
                 title: title,
                 post: post.split('\n'),
+                //! ADD IMAGE EDITING HERE
                 edited: true
             }, { merge: true });
         }
@@ -104,7 +105,7 @@ const EditPost = ({blogId}) => {
 
 
     return ( 
-        <div className="h-screen">
+        <div className="min-h-screen">
 
             <form onSubmit={handlePost}>
 

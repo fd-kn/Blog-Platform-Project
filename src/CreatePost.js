@@ -65,7 +65,7 @@ const CreatePost = () => {
                 timePublished: 0,
                 isPublished: false,
                 edited: false,
-                image: selectedImage //! ADD THIS TO ALL OTHER PAGES AND DISPLAY THIS
+                blogImage: selectedImage //! ADD THIS TO ALL OTHER PAGES AND DISPLAY THIS
             });
             window.location.replace('/ownblogs')
             console.log("Data added to Firestore successfully");

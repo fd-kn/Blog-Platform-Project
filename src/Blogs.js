@@ -34,7 +34,8 @@ const Blogs = () => {
                         date: doc.data().datePublished,
                         time: doc.data().timePublished,
                         blogID: doc.data().blogID,
-                        edited: doc.data().edited
+                        edited: doc.data().edited,
+                        blogImage: doc.data().blogImage
                     }
                     newBlogs.push(blogDetails);
                     });
@@ -102,6 +103,7 @@ const Blogs = () => {
                          m-5 p-5 border-2 solid border-gray-300 rounded-lg 
                         hover:scale-110 duration-300">
                             <Link to={`/blogtemplate/${'Published'}`}>
+                                <img className="h-20 w-20" src={blog.blogImage} alt="nooo" />
                                 <h1 className="text-4xl flex justify-center pb-10">{blog.title}</h1>
                                 <p>Written by: <b>{blog.author}</b></p>
                                 <p>Date Published: <b>{blog.date}</b></p>
