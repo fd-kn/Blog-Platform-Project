@@ -120,18 +120,20 @@ const OwnBlogs = () => {
               <div className="flex flex-wrap justify-start m-5">
                   {blogsToMap.map((blog, index) => (
                       <div key={index} onClick={()=>handlePostClick(blog.blogID)} 
-                      className=" w-2/5 m-5 p-5 border-2 solid border-gray-300 rounded-lg 
-                      hover:scale-110 duration-300">
+                      className=" w-2/5 m-5  border-2 solid border-gray-300 rounded-lg 
+                      hover:scale-110 duration-300 bg-red-200">
                           <Link to={`/blogtemplate/${'NotPublished'}`}>
-                              <img className="h-32 w-32" src={blog.blogImage} alt="nooo" />
+                              <img className="w-full h-40" src={blog.blogImage} alt="nooo" />
                               <h1 className="text-4xl flex justify-center pb-10">{blog.title}</h1>
-                              <p>Written by: <b>{blog.author}</b></p>
-                              {isDraft ? <p>Date Added: <b>{blog.date}</b></p> : 
-                              <div>
-                                <p>Date Added: <b>{blog.date}</b></p>
-                                <p>Date Published: <b>{blog.datePublished}</b></p>
+                              <div className="pl-2 pb-2">
+                                <p>Written by: <b>{blog.author}</b></p>
+                                {isDraft ? <p>Date Added: <b>{blog.date}</b> {blog.edited ? <p>(edited)</p> : null }</p> : 
+                                <div>
+                                  <p>Date Added: <b>{blog.date}</b></p>
+                                  <p>Date Published: <b>{blog.datePublished}</b> {blog.edited ? '(edited)' : null }</p>
+                                </div>
+                                }
                               </div>
-                              }
                               
 
                           </Link>

@@ -80,13 +80,13 @@ const Blogs = () => {
             {isSignedIn && isLoaded && (
                 <div className="flex justify-center">
                     <div>
-                        <button className="border-2 rounded-xl border-black
-                        p-5 hover:scale-110 duration-300 hover:bg-slate-300 ">
+                        <button className=" rounded-xl bg-blue-200
+                        p-3 hover:scale-110 duration-300 hover:bg-blue-400 ">
                         <Link to = '/createpost'>Create Blog Post</Link></button> 
                     </div>
                     <div>
-                        <button className="border-2 rounded-xl border-black
-                        p-5 ml-5 hover:scale-110 duration-300 hover:bg-slate-300">
+                        <button className="rounded-xl  bg-blue-200
+                        p-3 ml-5 hover:scale-110 duration-300 hover:bg-blue-400">
                         <Link to = '/ownblogs'>My Blogs</Link></button>
                     </div>
                 </div>
@@ -100,13 +100,15 @@ const Blogs = () => {
                      allblogs.map((blog, index) => (
                         <div key={index} onClick={()=>handlePostClick(blog.blogID)} 
                         className="w-4/5 sm:w-4/5 md:w-4/5 lg:w-2/5 xl:w-2/6
-                         m-5 p-5 border-2 solid border-gray-300 rounded-lg 
-                        hover:scale-110 duration-300">
+                         m-5  border-2 solid border-gray-300 rounded-lg 
+                        hover:scale-110 duration-300 bg-blue-200">
                             <Link to={`/blogtemplate/${'Published'}`}>
-                                <img className="h-20 w-20" src={blog.blogImage} alt="nooo" />
+                                <img className="w-full h-40 " src={blog.blogImage} alt="nooo" />
                                 <h1 className="text-4xl flex justify-center pb-10">{blog.title}</h1>
-                                <p>Written by: <b>{blog.author}</b></p>
-                                <p>Date Published: <b>{blog.date}</b></p>
+                                <div className="w-full pl-2 pb-2">
+                                    <p>Written by: <b>{blog.author}</b></p>
+                                    <p>Date Published: <b>{blog.date}</b> {blog.edited ? '(edited)' : null }</p>
+                                </div>
                             </Link>
                         </div>
                     ))

@@ -2,7 +2,7 @@ import { collection, doc, getDoc, getDocs, query, updateDoc, where } from "fireb
 import { useEffect, useState } from "react";
 import { db, storage } from "./firebaseconfig";
 import { deleteObject, getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import defaultIcon from './defaulticon.jpg'
+import defaultIcon from './Images/defaulticon.jpg'
 
 const Profile = () => {
     const [selectedImage, setSelectedImage] = useState(null);

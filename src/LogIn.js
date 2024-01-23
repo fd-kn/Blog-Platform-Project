@@ -1,6 +1,7 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "./firebaseconfig";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const LogIn = () => {
 
@@ -62,14 +63,14 @@ const LogIn = () => {
                     <label className='p-2 m-1 italic '>Email</label>
                     <div>
                         <input className="p-2 bg-transparent border-2 border-gray-300 rounded-md text-xl m-2 mb-4"  
-                        type="email" required name="email" placeholder='Enter email address...'
+                        type="email" required name="email" placeholder='Enter email address...' autoComplete="current-email"
                         onChange={(e) => { setExistEmail(e.target.value)}}></input>
                     </div>
 
                     <label className='p-2 m-1 italic '>Password</label>
                     <div>
                         <input className="p-2 bg-transparent border-2 border-gray-300 rounded-md text-xl m-2 mb-4"   
-                        type="password" required name="password" placeholder='Enter password...'
+                        type="password" required name="password" placeholder='Enter password...' autoComplete="current-password"
                         onChange={(e) => { setExistPassword(e.target.value)}}></input>
                     </div>
                     <button className="py-2 px-5 m-2 text-l
@@ -77,6 +78,15 @@ const LogIn = () => {
                     hover:scale-110 duration-300" type="submit">Log In</button>
                 </form>
             </div>
+            <div className="mt-10">
+                <p className="flex justify-center">Don't have an account?</p>
+                <div className="flex justify-center">
+                    <button className="py-2 px-5 m-2 text-l
+                        border-2 border-black rounded-xl hover:bg-slate-300 
+                        hover:scale-110 duration-300" ><Link to={'/signup'}>Create account</Link></button>
+                </div>
+            </div>
+
             {failure ===  'Email error' ? <p className="flex justify-center">This email is not registered.</p> :
              failure === 'Password error' ? <p className="flex justify-center">Incorrect password</p> :
              failure === 'Other error' ? <p className="flex justify-center">An error has occured. Please try again.</p> : null }

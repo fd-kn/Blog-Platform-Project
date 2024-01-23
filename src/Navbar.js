@@ -4,7 +4,7 @@ import { signOut } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import ConfirmModal from "./ConfirmModal";
-import defaultIcon from './defaulticon.jpg'
+import defaultIcon from './Images/defaulticon.jpg'
 
 
 const Navbar = () => {
@@ -79,27 +79,22 @@ const Navbar = () => {
 
 
     return ( 
-        <div className="border-b-2 border-b-black bg-gradient-to-r from-blue-400 via-blue-300 to-blue-200">
-            {/* <div className="flex justify-center m-5">
-                <h1 className="text-3xl">The Writer's Block</h1>
-            </div> */}
+        <div className="bg-gradient-to-br from-sky-300 via-blue-900 to-sky-300">
+
             <ul className="flow-root p-4">
                 <h1 className="float-left pl-3 text-3xl hover:scale-110 duration-300"><Link to="/home">The Writer's Block</Link></h1>
                 <div className="pt-2"> 
                     {!(isSignedIn) ?
                     <div>
                          <li className={`float-right pr-12 hover:scale-110 duration-300 ${location.pathname === '/login' ? 'underline' : 'no-underline'}`}><Link to='/login'>Log In</Link></li>
-                         <li className={`float-right pr-12 hover:scale-110 duration-300 ${location.pathname === '/signup' ? 'underline' : 'no-underline'}`}><Link to='/signup'>Sign Up</Link></li>
+                         {/* <li className={`float-right pr-12 hover:scale-110 duration-300 ${location.pathname === '/signup' ? 'underline' : 'no-underline'}`}><Link to='/signup'>Sign Up</Link></li> */}
                      </div> : 
                      <div>
                        <Link to='/profile'><img src={image} className='hover:scale-110 duration-300 float-right h-8 w-8  rounded-full' alt='profile'></img></Link>  
-                        {/* <li className={`float-right  hover:scale-110 duration-300 text-orange-400 ${location.pathname === '/profile' ? 'underline' : 'no-underline'}`}><Link to='/profile'>{userName}</Link></li> */}
                          <li className={`float-right pr-12 hover:scale-110 duration-300 ${location.pathname === '/signup' ? 'underline' : 'no-underline'}`} onClick={handleButtonClick}>Log Out</li>
                      </div>
                      }
 
-                    {/* <li className={`float-right pr-12 hover:scale-110 duration-300 ${location.pathname === '/settings' ? 'underline' : 'no-underline'}`}><Link to='/settings'>Settings</Link></li> */}
-                    {/* <li className={`float-right pr-12 hover:scale-110 duration-300 ${location.pathname === '/stories' ? 'underline' : 'no-underline'}`}><Link to='/stories'>Stories</Link></li> */}
                     <li className={`float-right pr-12 hover:scale-110 duration-300 ${location.pathname === '/blogs' ? 'underline' : 'no-underline'}`}><Link to="/blogs">Blogs</Link></li>
                     <li className={`float-right pr-12 hover:scale-110 duration-300 ${location.pathname === '/home' || location.pathname === '/' ? 'underline' : 'no-underline'}`}><Link to="/home">Home</Link></li>
                 

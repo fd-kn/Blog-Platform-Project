@@ -8,8 +8,8 @@ const EditPost = ({blogId}) => {
 
     const [title, setTitle] = useState('')
     const [post, setPost] = useState('')
-    const [newTitle, setNewTitle] = useState('')
-    const [newPost, setNewPost] = useState('')
+    // const [newTitle, setNewTitle] = useState('')
+    // const [newPost, setNewPost] = useState('')
 
 
     
@@ -82,19 +82,32 @@ const EditPost = ({blogId}) => {
                  nameofUser = 'N/A'
             }
 
-            const queryRef = query(collection(db, 'allBlogs'), where('blogID', "==", blogID));
-            const querySnapshot = await getDocs(queryRef);
-            if (!querySnapshot.empty) {
-            //   const blogDoc = querySnapshot.docs[0];
-
-              const docRef = doc(db, "allBlogs", blogID);
-              await updateDoc(docRef, {
+            //UPDATING BLOG IN ALLBLOGS COLLECTION IN FIREBASE
+              const docBlogRef = doc(db, "allBlogs", blogID);
+              await updateDoc(docBlogRef, {
                 title: title,
                 post: post.split('\n'),
                 //! ADD IMAGE EDITING HERE
                 edited: true
             }, { merge: true });
-        }
+
+            //UPDATING BLOG IN PUBLIC COLLECTION IN FIREBASE - but first checks if the blog is published
+            //IF NOT, THEN IT WILL ONLY BE UPDATED IN allBlogs SINCE IT DOESN'T EXIST IN publicBlogs
+
+            if((await getDoc(doc(db, 'publicBlogs', blogID))).exists()){
+                const docPublicRef = doc(db, 'publicBlogs', blogID);
+                await updateDoc(docPublicRef, {
+                    title: title,
+                    post: post.split('\n'),
+                    //! ADD IMAGE EDITING HERE
+                    edited: true
+                }, { merge: true})
+            }
+
+            //! SAVE CURRENT IMAGE IN A STATE TO DISPLAY - THEN UPDATE THAT IMAGE IN THE BLOG
+            //! USING THE STATE REGARDLESS OF CHANGE
+            //! CHANGE THE CANCEL OF BLOG SO THAT CHANGES ARE NOT SAVED IF THE USER CONFIRMS
+
             window.location.replace('/ownblogs')
             console.log('saved ')
 

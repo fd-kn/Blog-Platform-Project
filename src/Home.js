@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import  skytreesun  from "./skytreesun.jpg"
+import  skytreesun  from "./Images/skytreesun.jpg"
+import booksLeaves from "./Images/booksLeaves.jpg"
 
 // import { auth, db } from "./firebaseconfig";
 // import { doc, getDoc } from "firebase/firestore";

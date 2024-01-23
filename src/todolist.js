@@ -3,7 +3,7 @@
 // Add publish function
 // Add delete function
 // Add publish time and date
-//* Maybe pass blogID and userID through components rather than localstorage?
+//* Maybe pass blogID and userID through components rather than localstorage? OR USE REDUX
 // Show published time for blog template if blog is published 
 //Add published field for each blog 
 // Show public blogs if user is not signed in
@@ -11,12 +11,17 @@
 // Sepearate drafts and published blogs in My Blogs
 // Edit blogs
 //Make random blog account and check out how they work
+//! Fix draft and public blog selection - use windows back instead of local storage
 //! ANNOTATE ENTIRE CODE SO I CAN COME BACK TO IT
 //! Check out other sites for designs
 //! Filter blogs
 //! Animations
 //! Loading icon
 //! Icons for buttons
+//! Modal for removing profile image
+//! Don't save when cancelling blog post
+//! Add images when editing posts
+//! Default images for posts
 // Default profile picture
 //! Email change
 //! Check if email is valid?
@@ -34,7 +39,7 @@
 //! Overflowing words when dev tools screen maximised
 // Change to book id rather than titles
 // Adjust text box size
-//! Add images to posts
+// Add images to posts
 // Profile settings
 //! Add B I U and font colours
 //! Comments and likes

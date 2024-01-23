@@ -52,6 +52,7 @@ const BlogTemplate = ({isPublic}) => {
                         isPublished: doc.data().isPublished,
                         datePublished: doc.data().datePublished,
                         timePublished: doc.data().timePublished,
+                        edited: doc.data().edited,
                         blogImage: doc.data().blogImage                    
 
                       };
@@ -115,8 +116,12 @@ const BlogTemplate = ({isPublic}) => {
               userName: blogpost.author,
               blogID: blogpost.blogID,
               datePublished: fDate,
-              timePublished: fTime
+              timePublished: fTime,
+              edited: blogpost.edited,
+              blogImage: blogpost.blogImage
           });
+
+          //! UPDATE PUBLIC BLOGS WITH THIS INFO 
 
           setNotification('Blog published successfully');
 
@@ -162,7 +167,7 @@ const BlogTemplate = ({isPublic}) => {
 
 
     return ( 
-        <div className="h-screen">
+        <div className="min-h-screen">
              
             <div className="p-5">
 
@@ -183,7 +188,6 @@ const BlogTemplate = ({isPublic}) => {
                 <h1 className="flex justify-center text-7xl pb-4">{blogpost.title}</h1>
                 <div className="flex">
                       <p className="text-sm mr-6">Written by: <b>{blogpost.author}</b></p>
-
                       {isPublic === 'NotPublished' && blogpost.isPublished === true ?
                       <div>
                         <p className="text-sm">Date Added: <b>{blogpost.date}</b></p>
@@ -193,7 +197,10 @@ const BlogTemplate = ({isPublic}) => {
                         <p className="text-sm">Date Added: <b>{blogpost.date}</b></p>:
                         <p className="text-sm">Date Published: <b>{blogpost.datePublished}</b></p>
                       }
+                  <p>{blogpost.edited ? '(edited)' : null}</p>
+
                 </div>
+                
                 <div className="flex justify-center">
                 <img className="h-60 w-96" src={blogpost.blogImage} alt="nooo" />
 

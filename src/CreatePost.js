@@ -13,6 +13,7 @@ const CreatePost = () => {
     const [post, setPost] = useState('')
     const [showModal, setShowModal] = useState(false);
     const [selectedImage, setSelectedImage] = useState();
+    const [imageMessage, setImageMessage] = useState(false);
 
 
     var userID;
@@ -29,7 +30,12 @@ const CreatePost = () => {
             event.preventDefault();
         }
 
-        
+        console.log('image test')
+        console.log(selectedImage)
+        setImageMessage(false)
+    
+
+
         var nameofUser = 'N/A'
 
         const now = new Date();
@@ -65,7 +71,7 @@ const CreatePost = () => {
                 timePublished: 0,
                 isPublished: false,
                 edited: false,
-                blogImage: selectedImage //! ADD THIS TO ALL OTHER PAGES AND DISPLAY THIS
+                blogImage: selectedImage
             });
             window.location.replace('/ownblogs')
             console.log("Data added to Firestore successfully");
@@ -75,12 +81,14 @@ const CreatePost = () => {
 
         const handleConfirmation = async () => {
             setShowModal(false);
-            await handlePost();
+            window.location.replace('/blogs')
+
+            // await handlePost();
         };
 
         const handleCancel = () => {
             setShowModal(false);
-            window.location.replace('/blogs')
+            // window.location.replace('/blogs')
 
           };    
 
@@ -101,6 +109,9 @@ const CreatePost = () => {
 
         }
 
+        const noImage = () => {
+            setImageMessage(true)
+        }
 
 
     return (
@@ -110,16 +121,16 @@ const CreatePost = () => {
                 <div className="">
                 <form onSubmit={handlePost}>
 
-                    <label className='p-2 m-1 italic '>Title</label>
+                    <label className='p-2 italic text-xl font-bold '>Title</label>
                     <div>
-                        <input className="p-2 bg-transparent border-2 border-gray-300 rounded-md text-xl m-2 mb-4"  
+                        <input className="p-2 mt-4 bg-sky-200 border-2 border-gray-300 rounded-md text-xl mb-10"  
                          required placeholder='Enter blog title...'
                          onChange={(e) => { setTitle(e.target.value)}}
                         ></input>
                     </div>
 
                     {/* MAKE TEXTAREA BIGGER */}
-                    <label className="p-2 m-1 italic">Add Image</label>
+                    {/* <label className="p-2 m-1 italic">Add Image</label> */}
                     <div>
                     <input 
                         type="file"
@@ -127,25 +138,30 @@ const CreatePost = () => {
                         onChange={(e) => handleImageUpload(e.target.files[0])}
                         id="imageInput"
                         className="absolute opacity-0 w-0 h-0 overflow-hidden"
+                        required
                         
                     />
                     <label htmlFor="imageInput" 
-                        className="hover:scale-110 duration-300 cursor-pointer bg-blue-200 hover:bg-blue-400 p-2 rounded-lg">
+                        title="Please select an image"
+                        className="hover:scale-110 duration-300 cursor-pointer
+                         bg-blue-200 hover:bg-blue-400 p-2 rounded-lg">
                         Upload Image
                     </label>
                     </div>
 
+                    {imageMessage && !selectedImage && <p className="my-5 p-2 border-black border-2 bg-red-200 text-red-900 flex justify-center">Please add an image.</p>}
+
                     {selectedImage && (
-                    <div className="flex justify-center p-5">
-                        <img className='h-36 w-36 rounded-full border-4 border-black'
+                    <div className="mt-10">
+                        <img className='h-60 w-96 border-4 border-black'
                         src={selectedImage} alt="Selected" />
                     </div>
                 )}
 
-                    <label className='p-2 m-1 italic '>Post</label>
-                    <div className=" pb-4"> 
-                        <textarea className="p-2 resize-none w-full h-64 
-                        bg-transparent border-2 border-gray-300 rounded-md text-xl 
+                    <div className="pb-4 mt-10"> 
+                        <label className='p-2 text-xl font-bold  italic '>Post</label>
+                        <textarea className="p-2 mt-4 resize-none w-full h-64 
+                        bg-sky-200 border-2 border-gray-300 rounded-md text-xl 
                         whitespace-pre-wrap"   
                          required placeholder='Enter blog content...'
                          onChange={(e) => { setPost(e.target.value)}}
@@ -154,22 +170,23 @@ const CreatePost = () => {
 
                     <ConfirmModal
                         isOpen={showModal}
-                        message="Do you wish to save your work?"
+                        message="Your changes will not be saved if you leave. 
+                                 Do you wish to leave?"
                         onConfirm={handleConfirmation}
                         onCancel={handleCancel}
                     />
 
                     <button className="py-2 px-5 m-2 text-l
-                    border-2 border-black rounded-xl hover:bg-slate-300 
-                    hover:scale-110 duration-300" type="submit">Save Draft</button>
+                    rounded-xl  bg-blue-200 hover:bg-blue-400
+                    hover:scale-110 duration-300" type="submit" onClick={noImage}>Save Draft</button>
 
-                </form>
-
-                <button className="py-2 px-5 m-2 text-l
-                    border-2 border-black rounded-xl hover:bg-slate-300 
-                    hover:scale-110 duration-300" 
+                    <button className="py-2 px-5 m-2 text-l
+                     bg-blue-200 hover:bg-blue-400 rounded-xl
+                    hover:scale-110 duration-300" type="button"
                     onClick={post !=='' || title !== '' ? ()=>setShowModal(true) : () => window.history.back()}>
                     Cancel</button> 
+
+                </form>
 
 
 
