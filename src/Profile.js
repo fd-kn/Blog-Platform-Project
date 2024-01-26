@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { db, storage } from "./firebaseconfig";
 import { deleteObject, getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import defaultIcon from './Images/defaulticon.jpg'
+import ConfirmModal from "./ConfirmModal";
 
 const Profile = () => {
     const [selectedImage, setSelectedImage] = useState(null);
@@ -13,6 +14,7 @@ const Profile = () => {
     const [imageChange, setImageChange] = useState(false)
     const [ogImage, setOgImage] = useState(null)
     const [email, setEmail] = useState('')
+    const [showModal, setShowModal] = useState(false);
 
 
 
@@ -154,6 +156,16 @@ const Profile = () => {
         }
       }
 
+    const handleDeleteClick = () => {
+        if(selectedImage !== defaultIcon){
+            setShowModal(true);
+        }
+    }
+
+    const handleCancel = () => {
+        setShowModal(false);
+      };
+
     return (
         <div className="bg-gradient-to-br from-blue-200 via-purple-400 to-blue-200 min-h-screen">
 
@@ -179,15 +191,27 @@ const Profile = () => {
                         Upload Image
                     </label>
 
-                    <button onClick={deleteImage} className=" hover:scale-110 duration-300 cursor-pointer bg-blue-200 hover:bg-blue-400 p-2 rounded-lg ml-4">Remove Image</button>
+                    <button onClick={handleDeleteClick} 
+                        className=" hover:scale-110 duration-300 cursor-pointer bg-blue-200 hover:bg-blue-400 p-2 rounded-lg ml-4">
+                        Remove Image
+                    </button>
 
                 </div>
 
+                <ConfirmModal
+                    isOpen={showModal}
+                    message={'Do you wish to remove your profile image?'}
+                    onConfirm={deleteImage}
+                    onCancel={handleCancel}
+              />
+
 
                 {imageChange && (
-                            <div className="flex justify-center">
-                                <button className='p-2 hover:scale-110 duration-300' onClick={imageSave}>Save Picture</button>
-                                <button className='p-2 hover:scale-110 duration-300' onClick={cancelSave}>Cancel</button>
+                            <div className="flex justify-center fixed inset-0 z-50 items-center overflow-auto bg-black bg-opacity-50">
+                                <div className="border-2 border-black bg-red-200 p-4 rounded-lg">
+                                    <button className='mx-6 p-2 border-2 rounded-lg bg-blue-200  hover:bg-blue-400 border-black hover:scale-110 duration-300' onClick={imageSave}>Save Image</button>
+                                    <button className='mx-6 p-2 border-2 rounded-lg bg-blue-200  hover:bg-blue-400 border-black hover:scale-110 duration-300' onClick={cancelSave}>Cancel</button>
+                                </div>
                             </div>
                         )}
             </div>
