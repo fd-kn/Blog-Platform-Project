@@ -12,7 +12,7 @@ const CreatePost = () => {
     const [title, setTitle] = useState('')
     const [post, setPost] = useState('')
     const [showModal, setShowModal] = useState(false);
-    const [selectedImage, setSelectedImage] = useState();
+    const [selectedImage, setSelectedImage] = useState('');
     const [imageMessage, setImageMessage] = useState(false);
 
 
@@ -121,7 +121,7 @@ const CreatePost = () => {
                 <div className="">
                 <form onSubmit={handlePost}>
 
-                    <label className='p-2 italic text-xl font-bold '>Title</label>
+                    <label className='p-2 italic text-xl font-bold whitespace-pre-wrap'>Title</label>
                     <div>
                         <input className="p-2 mt-4 bg-sky-200 border-2 border-gray-300 rounded-md text-xl mb-10"  
                          required placeholder='Enter blog title...'
@@ -132,31 +132,31 @@ const CreatePost = () => {
                     {/* MAKE TEXTAREA BIGGER */}
                     {/* <label className="p-2 m-1 italic">Add Image</label> */}
                     <div>
-                    <input 
-                        type="file"
-                        accept="image/*"
-                        onChange={(e) => handleImageUpload(e.target.files[0])}
-                        id="imageInput"
-                        className="absolute opacity-0 w-0 h-0 overflow-hidden"
-                        required
-                        
-                    />
-                    <label htmlFor="imageInput" 
-                        title="Please select an image"
-                        className="hover:scale-110 duration-300 cursor-pointer
-                         bg-blue-200 hover:bg-blue-400 p-2 rounded-lg">
-                        Upload Image
-                    </label>
+                        <input 
+                            type="file"
+                            accept="image/*"
+                            onChange={(e) => handleImageUpload(e.target.files[0])}
+                            id="imageInput"
+                            className="absolute opacity-0 w-0 h-0 overflow-hidden"
+                            required
+                            
+                        />
+                        <label htmlFor="imageInput" 
+                            title="Please select an image"
+                            className="hover:scale-110 duration-300 cursor-pointer
+                            bg-blue-200 hover:bg-blue-400 p-2 rounded-lg">
+                            Upload Image
+                        </label>
                     </div>
 
-                    {imageMessage && !selectedImage && <p className="my-5 p-2 border-black border-2 bg-red-200 text-red-900 flex justify-center">Please add an image.</p>}
+                    {imageMessage && !selectedImage && <p className="my-5 p-2 rounded-lg shadow-red-200 bg-red-200 text-red-900 flex justify-center">Please add an image.</p>}
 
                     {selectedImage && (
-                    <div className="mt-10">
-                        <img className='h-60 w-96 border-4 border-black'
-                        src={selectedImage} alt="Selected" />
-                    </div>
-                )}
+                        <div className="mt-10">
+                            <img className='h-60 w-96 '
+                            src={selectedImage} alt="Selected" />
+                        </div>
+                    )}
 
                     <div className="pb-4 mt-10"> 
                         <label className='p-2 text-xl font-bold  italic '>Post</label>
@@ -183,7 +183,7 @@ const CreatePost = () => {
                     <button className="py-2 px-5 m-2 text-l
                      bg-blue-200 hover:bg-blue-400 rounded-xl
                     hover:scale-110 duration-300" type="button"
-                    onClick={post !=='' || title !== '' || selectedImage !== '' ? ()=>setShowModal(true) : () => window.history.back()}>
+                    onClick={post =='' && title == '' && selectedImage == '' ? ()=>window.history.back() : () => setShowModal(true)}>
                     Cancel</button> 
 
                 </form>

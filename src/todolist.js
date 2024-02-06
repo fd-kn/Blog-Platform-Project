@@ -18,10 +18,9 @@
 //! Animations
 //! Loading icon
 //! Icons for buttons
-//! Modal for removing profile image
+// Modal for removing profile image
 //! Don't save when cancelling blog post
-//! Add images when editing posts
-//! Default images for posts
+// Add images when editing posts
 // Default profile picture
 //! Email change
 //! Check if email is valid?

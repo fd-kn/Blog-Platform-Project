@@ -109,7 +109,7 @@ const OwnBlogs = () => {
 
 
     return ( 
-        <div className="bg-violet-200 min-h-screen">
+        <div className="min-h-screen">
           <h1 className="flex justify-start p-5 text-3xl italic">My Blogs</h1>
           <div className="flex justify-start m-5 text-xl italic"> 
             <button className={`p-2 m-2 hover:scale-110 duration-300 ${isDraft && 'underline'}`} onClick={() => handleSplit('Draft')} >Drafts</button>
@@ -120,12 +120,12 @@ const OwnBlogs = () => {
               <div className="flex flex-wrap justify-start m-5">
                   {blogsToMap.map((blog, index) => (
                       <div key={index} onClick={()=>handlePostClick(blog.blogID)} 
-                      className=" w-2/5 m-5  border-2 solid border-gray-300 rounded-lg 
-                      hover:scale-110 duration-300 bg-red-200">
+                      className=" w-5/6 sm:w-8/12 md:w-5/12 lg:w-4/12 xl:w-3/12 m-5 shadow-md shadow-gray-200 rounded-lg 
+                      hover:scale-110 duration-300">
                           <Link to={`/blogtemplate/${'NotPublished'}`}>
-                              <img className="w-full h-40" src={blog.blogImage} alt="nooo" />
-                              <h1 className="text-4xl flex justify-center pb-10">{blog.title}</h1>
-                              <div className="pl-2 pb-2">
+                              <img className="w-full h-48 rounded-t-lg mb-6" src={blog.blogImage} alt="nooo" />
+                              <h1 className="text-4xl  pb-12 p-2 break-words text-center">{blog.title}</h1>
+                              <div className="pl-2 pb-2 text-xs break-words">
                                 <p>Written by: <b>{blog.author}</b></p>
                                 {isDraft ? <p>Date Added: <b>{blog.date}</b> {blog.edited ? <p>(edited)</p> : null }</p> : 
                                 <div>
@@ -141,7 +141,7 @@ const OwnBlogs = () => {
                   ))}
               </div>
               <button className="py-2 px-5 m-2 text-l
-                      border-2 border-black rounded-xl hover:bg-slate-300 
+                      rounded-xl bg-blue-200 hover:bg-blue-400
                       hover:scale-110 duration-300"><Link to='/blogs'>Back</Link>
               </button>
         </div>

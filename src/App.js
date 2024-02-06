@@ -27,7 +27,7 @@ function App() {
 
   return (
     // <div className="bg-gradient-to-br from-purple-400 via-red-200 to-blue-300">
-    <div className="bg-home">
+    <div className="">
 
     <BrowserRouter>
     <div >

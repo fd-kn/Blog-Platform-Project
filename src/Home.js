@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import  skytreesun  from "./Images/skytreesun.jpg"
-import booksLeaves from "./Images/booksLeaves.jpg"
+import deviljin from "./Images/deviljin.jpg"
+import deviljinning from "./Images/deviljinning.jpg"
 
 // import { auth, db } from "./firebaseconfig";
 // import { doc, getDoc } from "firebase/firestore";
@@ -20,7 +21,7 @@ const Home = () => {
 
 
     return ( 
-        <div className="bg-home min-h-screen">
+        <div className="min-h-screen">
             <div className="flex justify-center p-10">
                 <h1 className="text-3xl italic bold underline">Welcome to The Writer's Block!</h1>
             </div>
@@ -32,18 +33,18 @@ const Home = () => {
                     obcaecati sint expedita eligendi facilis voluptates!
                 </p>
                 {(!isSignedIn) ? <button className="py-4 px-10 m-10 text-2xl
-                 border-2 border-black rounded-3xl hover:bg-slate-300 
+                 rounded-3xl bg-blue-200 hover:bg-blue-400 
                  hover:scale-110 duration-300"><Link to='/signup'>Sign up now!</Link></button> 
                  : 
                  <button className="py-4 px-10 m-10 text-2xl
-                 border-2 border-black rounded-3xl hover:bg-slate-300 
+                 rounded-3xl bg-blue-200 hover:bg-blue-400 
                  hover:scale-110 duration-300"><Link to='/createpost'>Start writing!</Link></button>}
             </div>
         {/* {userID ? <p>{user.email}</p> : null} */}
         {/* <p>{userName}</p> */}
 
         <div className="flex justify-center">
-            <img className="p-5" src={skytreesun} alt="Example" />
+            <img className="h-4/6 w-4/6 rounded-3xl border-red-400 shadow-lg shadow-black border-4 m-5" src={isSignedIn ? deviljinning : deviljin } alt="Example" />
         </div>
 
 

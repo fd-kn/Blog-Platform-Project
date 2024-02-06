@@ -2,6 +2,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "./firebaseconfig";
 import { useState } from "react";
 import { doc, setDoc } from "firebase/firestore"; 
+import { Link } from "react-router-dom";
 
 
 
@@ -68,8 +69,12 @@ const SignUp = () => {
     }
 
     return ( 
-        <div className="bg-green-200 h-screen">
+        <div className="min-h-screen">
             <h1 className="flex justify-center text-3xl pt-10">Sign Up</h1>
+            <h6 className="flex justify-center pt-4">Already have an account?<p className="translate-x-2 text-blue-500 underline hover:scale-110 
+                         duration-300"><Link to={'/login'}>Log in here!</Link></p></h6>
+
+
             <div className="flex justify-center mt-10">
                 <form onSubmit={handleSubmit}>
                     <label className='p-2 m-1 italic '>Username</label>
@@ -95,11 +100,16 @@ const SignUp = () => {
                         type="password" required name="password" placeholder='Enter password...' autoComplete="current-password"
                         onChange={(e) => { setNewPassword(e.target.value)}}></input>
                     </div>
-                    <button className="py-2 px-5 m-2 text-l
-                    border-2 border-black rounded-xl hover:bg-slate-300 
-                    hover:scale-110 duration-300" type="submit">Sign Up</button>
+                    <div className="flex justify-center">
+                      <button className="py-2 px-5 m-2 text-l
+                      rounded-xl bg-blue-200 hover:bg-blue-400 
+                      hover:scale-110 duration-300" type="submit">Sign Up</button>
+                    </div>
                 </form>                
             </div>
+
+
+
             {failure ===  'Taken email' ? <p className="flex justify-center">This email is already in use</p> :
              failure === 'Weak password' ? <p className="flex justify-center">Your password should be atleast 6 characters</p> :
              failure === 'Other error' ? <p className="flex justify-center">An error has occured. Please try again.</p> : null }

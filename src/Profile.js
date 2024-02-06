@@ -167,11 +167,11 @@ const Profile = () => {
       };
 
     return (
-        <div className="bg-gradient-to-br from-blue-200 via-purple-400 to-blue-200 min-h-screen">
+        <div className="min-h-screen">
 
             {selectedImage && (
                     <div className="flex justify-center p-5">
-                        <img className='h-36 w-36 rounded-full border-4 border-black'
+                        <img className='h-52 w-52 rounded-full border-2 border-black'
                         src={selectedImage} alt="Selected" />
                     </div>
                 )}
@@ -208,9 +208,18 @@ const Profile = () => {
 
                 {imageChange && (
                             <div className="flex justify-center fixed inset-0 z-50 items-center overflow-auto bg-black bg-opacity-50">
-                                <div className="border-2 border-black bg-red-200 p-4 rounded-lg">
-                                    <button className='mx-6 p-2 border-2 rounded-lg bg-blue-200  hover:bg-blue-400 border-black hover:scale-110 duration-300' onClick={imageSave}>Save Image</button>
-                                    <button className='mx-6 p-2 border-2 rounded-lg bg-blue-200  hover:bg-blue-400 border-black hover:scale-110 duration-300' onClick={cancelSave}>Cancel</button>
+                                <div className="border-2 border-black bg-white p-4 rounded-lg">
+                                    <div className="flex justify-center m-4">
+                                        <img className="h-52 w-52 rounded-full border-4 border-black" src={selectedImage} alt="new profile" />
+                                    </div>
+                                    <button className='mx-6 p-2 rounded-lg bg-blue-200  hover:bg-blue-400 hover:scale-110 duration-300' 
+                                        onClick={imageSave}>Save Image
+                                    </button>
+
+                                    <button className='mx-6 p-2 rounded-lg bg-blue-200  hover:bg-blue-400 hover:scale-110 duration-300' 
+                                        onClick={cancelSave}>Cancel
+                                    </button>
+
                                 </div>
                             </div>
                         )}

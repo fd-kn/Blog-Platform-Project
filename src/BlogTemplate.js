@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { db } from "./firebaseconfig";
 import { Link } from "react-router-dom";
 import ConfirmModal from "./ConfirmModal";
+import backArrow from "./Images/backArrow.jpg";
 
 const BlogTemplate = ({isPublic}) => {
 
@@ -167,7 +168,7 @@ const BlogTemplate = ({isPublic}) => {
 
 
     return ( 
-        <div className="min-h-screen">
+        <div className="min-h-screen max-w-screen">
              
             <div className="p-5">
 
@@ -180,13 +181,51 @@ const BlogTemplate = ({isPublic}) => {
             </p>
           </div>
         )}
+  {/* BLOG ISN'T PUBLISHED AND ON OWN BLOGS PAGE */}
+  {isPublic === 'NotPublished' && blogpost && blogpost.isPublished === false ? 
+           <div>
+              <button className="py-2 px-5 m-2 text-l
+                    rounded-xl bg-blue-200 hover:bg-blue-400
+                    hover:scale-110 duration-300 translate-y-1"><Link to='/ownblogs'><img className="h-6 w-6" src={backArrow} alt="arrow" /></Link></button>
+            <button className="py-2 px-5 m-2 text-l
+                    rounded-xl bg-blue-200 hover:bg-blue-400  
+                    hover:scale-110 duration-300" onClick={()=>handleButtonClick('publish')}>Publish</button>
+            <button className="py-2 px-5 m-2 text-l
+                  rounded-xl bg-blue-200 hover:bg-blue-400 
+                  hover:scale-110 duration-300"><Link to='/editpost'>Edit</Link></button>
+            <button className="py-2 px-5 m-2 text-l
+                    rounded-xl bg-blue-200 hover:bg-blue-400 
+                    hover:scale-110 duration-300" onClick={()=>handleButtonClick('delete', blogID)}>Delete</button>
 
+            </div>
+            // BLOG IS PUBLISHED AND ON OWN BLOGS PAGE
+                  : isPublic === 'NotPublished' && blogpost &&  blogpost.isPublished === true ?
+              <div>
+                  <button className="py-2 px-5 m-2 text-l
+                  rounded-xl bg-blue-200 hover:bg-blue-400 translate-y-1
+                  hover:scale-110 duration-300"><Link to='/ownblogs'><img className="h-6 w-6" src={backArrow} alt="arrow" /></Link></button>
+                  <button className="py-2 px-5 m-2 text-l
+                  rounded-xl bg-blue-200 hover:bg-blue-400 
+                  hover:scale-110 duration-300" onClick={()=>handleButtonClick('unpublish', blogID)}>Unpublish</button> 
+                  <button className="py-2 px-5 m-2 text-l
+                  rounded-xl bg-blue-200 hover:bg-blue-400 
+                  hover:scale-110 duration-300"><Link to='/editpost'>Edit</Link></button>
+                </div>  
+                // BLOG IS PUBLISHED AND ON PUBLIC BLOGS PAGE
+                  :
+                  <button className="py-2 px-5 m-2 text-l
+                  rounded-xl bg-blue-200 hover:bg-blue-400 translate-y-1 
+                  hover:scale-110 duration-300"><Link to='/blogs'><img className="h-6 w-6" src={backArrow} alt="arrow" /></Link></button>
+            }
 
- 
+ {/* flex justify-center p-5 text-5xl */}
             {blogpost && (
-              <div className="">
-                <h1 className="flex justify-center text-7xl pb-4">{blogpost.title}</h1>
-                <div className="flex">
+              <div className="mx-auto p-5">
+                <h1 className="text-5xl break-words text-center">{blogpost.title}</h1>
+                <div className="flex justify-center m-10">
+                  <img className="rounded-lg h-72 w-3/5" src={blogpost.blogImage} alt="nooo" />
+                </div>
+                <div className="flex justify-center">
                       <p className="text-sm mr-6">Written by: <b>{blogpost.author}</b></p>
                       {isPublic === 'NotPublished' && blogpost.isPublished === true ?
                       <div>
@@ -197,15 +236,12 @@ const BlogTemplate = ({isPublic}) => {
                         <p className="text-sm">Date Added: <b>{blogpost.date}</b></p>:
                         <p className="text-sm">Date Published: <b>{blogpost.datePublished}</b></p>
                       }
-                  <p>{blogpost.edited ? '(edited)' : null}</p>
+                  <p className="translate-x-2 ">{blogpost.edited ? '(edited)' : null}</p>
 
                 </div>
                 
-                <div className="flex justify-center">
-                <img className="h-60 w-96" src={blogpost.blogImage} alt="nooo" />
 
-                </div>
-                  <div className=" text-xl p-10 flex justify-center">
+                  <div className="text-xl p-10 break-words">
                   
                     {Array.isArray(blogpost.post) ? 
                     blogpost.post.map((postItem, index) => (
@@ -231,41 +267,7 @@ const BlogTemplate = ({isPublic}) => {
                 onConfirm={() => handleConfirmation(action, storeId)}
                 onCancel={handleCancel}
               />
-          {/* BLOG ISN'T PUBLISHED AND ON OWN BLOGS PAGE */}
-           {isPublic === 'NotPublished' && blogpost && blogpost.isPublished === false ? 
-           <div>
-            <button className="py-2 px-5 m-2 text-l
-                    border-2 border-black rounded-xl hover:bg-slate-300 
-                    hover:scale-110 duration-300" onClick={()=>handleButtonClick('publish')}>Publish</button>
-            <button className="py-2 px-5 m-2 text-l
-                    border-2 border-black rounded-xl hover:bg-slate-300 
-                    hover:scale-110 duration-300" onClick={()=>handleButtonClick('delete', blogID)}>Delete</button>
-            <button className="py-2 px-5 m-2 text-l
-                  border-2 border-black rounded-xl hover:bg-slate-300 
-                  hover:scale-110 duration-300"><Link to='/editpost'>Edit</Link></button>
-            <button className="py-2 px-5 m-2 text-l
-                    border-2 border-black rounded-xl hover:bg-slate-300 
-                    hover:scale-110 duration-300"><Link to='/ownblogs'>Back</Link></button>
-            </div>
-            // BLOG IS PUBLISHED AND ON OWN BLOGS PAGE
-                  : isPublic === 'NotPublished' && blogpost &&  blogpost.isPublished === true ?
-              <div>
-                  <button className="py-2 px-5 m-2 text-l
-                  border-2 border-black rounded-xl hover:bg-slate-300 
-                  hover:scale-110 duration-300" onClick={()=>handleButtonClick('unpublish', blogID)}>Unpublish</button>
-                  <button className="py-2 px-5 m-2 text-l
-                  border-2 border-black rounded-xl hover:bg-slate-300 
-                  hover:scale-110 duration-300"><Link to='/ownblogs'>Back</Link></button> 
-                  <button className="py-2 px-5 m-2 text-l
-                  border-2 border-black rounded-xl hover:bg-slate-300 
-                  hover:scale-110 duration-300"><Link to='/editpost'>Edit</Link></button>
-                </div>  
-                // BLOG IS PUBLISHED AND ON PUBLIC BLOGS PAGE
-                  :
-                  <button className="py-2 px-5 m-2 text-l
-                  border-2 border-black rounded-xl hover:bg-slate-300 
-                  hover:scale-110 duration-300"><Link to='/blogs'>Back</Link></button>
-            }
+        
 
 
 
