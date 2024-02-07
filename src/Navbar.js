@@ -11,8 +11,9 @@ const Navbar = () => {
     const location = useLocation();
 
     // const [userName, setUserName] = useState()
-    const [showModal, setShowModal] = useState()
-    const [image, setImage] = useState()
+    const [showModal, setShowModal] = useState(false);
+    const [image, setImage] = useState();
+    const [mobileNav, setMobileNav] = useState(false);
 
     var userID;
     if(JSON.parse(localStorage.getItem('userID'))){
@@ -77,14 +78,58 @@ const Navbar = () => {
       setShowModal(false);
     };
 
+    const mobileNavbar = () => {
+        setMobileNav(!mobileNav);
+    }
 
+    useEffect(() => {
+      const handleResize = () => {
+        if (window.innerWidth > 640) {
+          setMobileNav(false);  
+        }
+      };
+    
+      // Add event listener
+      window.addEventListener('resize', handleResize);
+    
+      // Remove event listener on cleanup
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
+    }, []);
+    
     return ( 
-        <div className="bg-sky-100 shadow-lg shadow-blue-200 sm:flex sm:justify-between">
+        <div className="bg-sky-100 shadow-lg shadow-blue-200 sm:flex sm:justify-between relative">
           <div className="flex justify-between">
               <h1 className="text-center flex-grow p-4 text-3xl hover:scale-110 duration-300 "><Link to="/home">The Writer's Block</Link></h1>
-              <button className="sm:hidden p-4 text-3xl">=</button>
+              <button onClick={mobileNavbar} className="sm:hidden p-4 text-3xl hover:scale-110 duration-300">{mobileNav ? 'x' : '=' }</button>
               {/* //!Put an onclick here so that when the state is changed, new navbar will appear, like the modal */}
           </div>
+
+          {/* MOBILE NAVBAR */}
+          {mobileNav && 
+          <div className="absolute right-0 mt-2 w-48 bg-white 
+           rounded shadow-lg overflow-hidden z-20">
+            <ul className="p-4">
+              <li className={`block hover:scale-110 duration-300 ${location.pathname === '/home' || location.pathname === '/' ? 'underline' : 'no-underline'}`}><Link to="/home">Home</Link></li>
+              <li className={`block hover:scale-110 duration-300 ${location.pathname === '/blogs' ? 'underline' : 'no-underline'}`}><Link to="/blogs">Blogs</Link></li>
+
+                  {!(isSignedIn) ?
+                      <li className={ `block hover:scale-110 duration-300 ${location.pathname === '/login' ? 'underline' : 'no-underline'}`}><Link to='/login'>Log In</Link></li>
+                    : 
+                  <div className="">
+                    <li className={`block hover:scale-110 duration-300 ${location.pathname === '/profile' || location.pathname === '/' ? 'underline' : 'no-underline'}`}> <Link to='/profile'>Profile</Link></li>
+                    <li className={`block hover:scale-110 duration-300 cursor-pointer ${location.pathname === '/signup' ? 'underline' : 'no-underline'}`} onClick={handleButtonClick}>Log Out</li>
+                  </div>
+                  }                                
+            </ul>
+            </div>
+
+          }
+
+
+
+          {/* WEB NAVBAR */}
                 <ul className="p-4 sm:flex hidden">
                 {/* <div className="pt-2">  */}
                 <li className={`pl-12 hover:scale-110 duration-300 ${location.pathname === '/home' || location.pathname === '/' ? 'underline' : 'no-underline'}`}><Link to="/home">Home</Link></li>
