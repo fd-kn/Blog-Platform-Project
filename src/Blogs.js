@@ -2,6 +2,8 @@ import { collection, getDocs, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { db } from "./firebaseconfig";
+import  editLogo  from "./Images/EditLogo.png"
+import  bookLogo  from "./Images/BookLogo.svg"
 
 const Blogs = () => {
 
@@ -79,16 +81,23 @@ const Blogs = () => {
             <div>
             {isSignedIn && isLoaded && (
                 <div className="flex justify-center">
-                    <div>
+
+                    <div className="">
                         <button className=" rounded-xl bg-blue-200
-                        p-3 hover:scale-110 duration-300 hover:bg-blue-400 ">
-                        <Link to = '/createpost'>Create Blog Post</Link></button> 
+                        p-3 hover:scale-110 duration-300 hover:bg-blue-400">
+                        <Link to = '/createpost' className="flex">
+                            Create <img className="h-6 w-6 ml-2" src={editLogo} alt="edit"/>
+                        </Link></button> 
                     </div>
+
                     <div>
                         <button className="rounded-xl  bg-blue-200
                         p-3 ml-5 hover:scale-110 duration-300 hover:bg-blue-400">
-                        <Link to = '/ownblogs'>My Blogs</Link></button>
+                        <Link to = '/ownblogs' className="flex">
+                            My Blogs <img className="h-6 w-6 ml-2" src={bookLogo} alt="my blogs"/> 
+                        </Link></button>
                     </div>
+
                 </div>
             )}
             

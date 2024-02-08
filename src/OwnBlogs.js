@@ -2,6 +2,8 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "./firebaseconfig";
 import { Link } from "react-router-dom";
+import backArrow from "./Images/backArrow.jpg";
+
 
 const OwnBlogs = () => {
 
@@ -109,8 +111,17 @@ const OwnBlogs = () => {
 
 
     return ( 
-        <div className="min-h-screen">
-          <h1 className="flex justify-start p-5 text-3xl italic">My Blogs</h1>
+        <div className="min-h-screen p-5">
+
+          <div className="flex justify-between pt-10 ">
+              <button className="py-2 px-5 m-2 text-l rounded-xl bg-blue-200 hover:bg-blue-400
+              hover:scale-110 duration-300"><Link to='/blogs'><img className="h-6 w-6" src={backArrow} alt="back" /></Link>
+              </button>
+              <h1 className="text-4xl -translate-x-10 flex-grow text-center italic">My Blogs</h1>
+          </div>
+
+
+
           <div className="flex justify-start m-5 text-xl italic"> 
             <button className={`p-2 m-2 hover:scale-110 duration-300 ${isDraft && 'underline'}`} onClick={() => handleSplit('Draft')} >Drafts</button>
             <button className={`p-2 m-2 hover:scale-110 duration-300 ${!isDraft && 'underline'}`} onClick={() => handleSplit('Published')}>Published</button>
@@ -140,10 +151,6 @@ const OwnBlogs = () => {
                       </div>
                   ))}
               </div>
-              <button className="py-2 px-5 m-2 text-l
-                      rounded-xl bg-blue-200 hover:bg-blue-400
-                      hover:scale-110 duration-300"><Link to='/blogs'>Back</Link>
-              </button>
         </div>
 
         );

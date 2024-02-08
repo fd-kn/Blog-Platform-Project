@@ -216,6 +216,7 @@ const BlogTemplate = ({isPublic}) => {
                   <button className="py-2 px-5 m-2 text-l
                   rounded-xl bg-blue-200 hover:bg-blue-400 translate-y-1 
                   hover:scale-110 duration-300"><Link to='/blogs'><img className="h-6 w-6" src={backArrow} alt="arrow" /></Link></button>
+              //! ADD HISTORY BACK TO ALL THESE BACK BUTTONS
             }
 
  {/* flex justify-center p-5 text-5xl */}
@@ -223,7 +224,7 @@ const BlogTemplate = ({isPublic}) => {
               <div className="mx-auto p-5">
                 <h1 className="text-5xl break-words text-center">{blogpost.title}</h1>
                 <div className="flex justify-center m-10">
-                  <img className="rounded-lg h-72 w-3/5" src={blogpost.blogImage} alt="nooo" />
+                  <img className="rounded-lg h-72  w-6/7 sm:w-3/5" src={blogpost.blogImage} alt="nooo" />
                 </div>
                 <div className="flex justify-center">
                       <p className="text-sm mr-6">Written by: <b>{blogpost.author}</b></p>
