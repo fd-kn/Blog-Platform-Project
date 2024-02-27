@@ -73,6 +73,14 @@ const Blogs = () => {
         localStorage.setItem('blogID', JSON.stringify(blogID));
       }
 
+      const handleMyBlogsClick = () => {
+        const draftStorage = JSON.parse(localStorage.getItem('draftStorage'));
+        if (draftStorage !== null) {
+            localStorage.setItem('draftStorage', JSON.stringify(true));
+        } 
+        window.location.replace('/ownblogs')
+      }
+
 
     return ( 
         <div className=" p-10 min-h-screen">
@@ -92,7 +100,9 @@ const Blogs = () => {
 
                     <div>
                         <button className="rounded-xl  bg-blue-200
-                        p-3 ml-5 hover:scale-110 duration-300 hover:bg-blue-400">
+                        p-3 ml-5 hover:scale-110 duration-300 hover:bg-blue-400"
+                        onClick={handleMyBlogsClick}
+                        >
                         <Link to = '/ownblogs' className="flex">
                             My Blogs <img className="h-6 w-6 ml-2" src={bookLogo} alt="my blogs"/> 
                         </Link></button>

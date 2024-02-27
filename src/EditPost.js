@@ -162,56 +162,55 @@ const EditPost = ({blogId}) => {
             <h1 className="flex justify-center text-3xl pt-10">Edit Blog Post</h1>
 
             <div className="p-4 w-4/5 mt-10">
-            <form onSubmit={() => setSaveModal(true)}>
-
-            <label className='p-2 italic text-xl font-bold'>Title</label>
-            <div>
-                <input className="p-2 bg-transparent border-2 border-gray-300 bg-sky-200 rounded-md text-xl mt-4 mb-10"  
-                required placeholder='Enter blog title...' value={title}
-                onChange={(e) => { setTitle(e.target.value);
-                    handleInputChange();}}
-                ></input>
-            </div>
-
-            {image && (
-                <div className="mb-6">
-                    <img className='h-60 w-96 border-4 border-black'
-                    src={image} alt="original" />
-                    </div>
-            )}
-            
-            <div>
-                        <input 
-                            type="file"
-                            accept="image/*"
-                            onChange={(e) => handleImageUpload(e.target.files[0])}
-                            id="imageInput"
-                            className="absolute opacity-0 w-0 h-0 overflow-hidden"
-                            // required
-                            
-                        />
-                        <label htmlFor="imageInput" 
-                            title="Please select an image"
-                            className="hover:scale-110 duration-300 cursor-pointer
-                            bg-blue-200 hover:bg-blue-400 p-2 rounded-lg">
-                            Change Image
-                        </label>
+                <form onSubmit={() => setSaveModal(true)}>
+                    <label className='p-2 italic text-xl font-bold'>Title</label>
+                    <div>
+                        <input className="p-2 bg-transparent border-2 border-gray-300 bg-sky-200 rounded-md text-xl mt-4 mb-10"  
+                        required placeholder='Enter blog title...' value={title}
+                        onChange={(e) => { setTitle(e.target.value);
+                            handleInputChange();}}
+                        ></input>
                     </div>
 
+                    {image && (
+                        <div className="mb-6">
+                            <img className='h-60 w-96 border-4 border-black'
+                            src={image} alt="original" />
+                            </div>
+                    )}
+                    
+                    <div>
+                                <input 
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={(e) => handleImageUpload(e.target.files[0])}
+                                    id="imageInput"
+                                    className="absolute opacity-0 w-0 h-0 overflow-hidden"
+                                    // required
+                                    
+                                />
+                                <label htmlFor="imageInput" 
+                                    title="Please select an image"
+                                    className="hover:scale-110 duration-300 cursor-pointer
+                                    bg-blue-200 hover:bg-blue-400 p-2 rounded-lg">
+                                    Change Image
+                                </label>
+                            </div>
 
 
-            <div className="pb-4 mt-10"> 
-                <label className='p-2 text-xl font-bold  italic '>Post</label>
-                <textarea className="p-2 mt-4 resize-none w-full h-64 
-                bg-transparent border-2 bg-sky-200 border-gray-300 rounded-md text-xl 
-                whitespace-pre-wrap"   
-                required placeholder='Enter blog content...' value={post}
-                onChange={(e) => { setPost(e.target.value);
-                handleInputChange();}}
-                ></textarea>
-            </div>
 
-            </form>
+                    <div className="pb-4 mt-10"> 
+                        <label className='p-2 text-xl font-bold  italic '>Post</label>
+                        <textarea className="p-2 mt-4 resize-none w-full h-64 
+                        bg-transparent border-2 bg-sky-200 border-gray-300 rounded-md text-xl 
+                        whitespace-pre-wrap"   
+                        required placeholder='Enter blog content...' value={post}
+                        onChange={(e) => { setPost(e.target.value);
+                        handleInputChange();}}
+                        ></textarea>
+                    </div>
+
+                </form>
 
             <button disabled={!changesMade} 
                 className={`py-2 px-5 m-2 text-l rounded-xl ${

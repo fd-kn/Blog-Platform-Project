@@ -216,7 +216,7 @@ const BlogTemplate = ({isPublic}) => {
                   <button className="py-2 px-5 m-2 text-l
                   rounded-xl bg-blue-200 hover:bg-blue-400 translate-y-1 
                   hover:scale-110 duration-300"><Link to='/blogs'><img className="h-6 w-6" src={backArrow} alt="arrow" /></Link></button>
-              //! ADD HISTORY BACK TO ALL THESE BACK BUTTONS
+              //! ADD HISTORY BACK TO ALL THESE BACK
             }
 
  {/* flex justify-center p-5 text-5xl */}

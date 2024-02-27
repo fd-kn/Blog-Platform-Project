@@ -44,7 +44,8 @@ const Home = () => {
         {/* <p>{userName}</p> */}
 
         <div className="flex justify-center">
-            <img className="h-4/6 w-4/6 rounded-3xl border-red-400 shadow-lg shadow-black border-4 m-5" src={isSignedIn ? deviljinning : deviljin } alt="Example" />
+            <img className="h-4/6 w-4/6 rounded-3xl border-red-400 shadow-lg shadow-black border-4 m-5" 
+                src={isSignedIn ? deviljinning : deviljin } alt="Example" />
         </div>
 
 

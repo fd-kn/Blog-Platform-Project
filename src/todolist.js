@@ -19,7 +19,7 @@
 //! Loading icon
 //! Icons for buttons
 // Modal for removing profile image
-//! Don't save when cancelling blog post
+// Don't save when cancelling blog post
 // Add images when editing posts
 // Default profile picture
 //! Email change

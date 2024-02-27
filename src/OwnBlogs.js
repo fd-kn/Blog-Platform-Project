@@ -17,7 +17,7 @@ const OwnBlogs = () => {
       const draftStorage = JSON.parse(localStorage.getItem('draftStorage'));
       if (draftStorage !== null) {
         setIsDraft(draftStorage);
-      }
+      } 
     }, []);
 
     var userID;

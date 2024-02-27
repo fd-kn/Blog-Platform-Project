@@ -105,10 +105,11 @@ const Profile = () => {
 
                 const publicblogRef = doc(db, "publicBlogs", blogDoc.id);
                 await updateDoc(publicblogRef, { userName: tempUserName }, { merge: true });
+                console.log('Public username:' + tempUserName )
             });
 
             setEditingUsername(false);
-            window.location.reload();
+            // window.location.reload();
 
 
         } catch (error) {

@@ -183,7 +183,7 @@ const CreatePost = () => {
                     <button className="py-2 px-5 m-2 text-l
                      bg-blue-200 hover:bg-blue-400 rounded-xl
                     hover:scale-110 duration-300" type="button"
-                    onClick={post =='' && title == '' && selectedImage == '' ? ()=>window.history.back() : () => setShowModal(true)}>
+                    onClick={post ==='' && title === '' && selectedImage === '' ? ()=>window.history.back() : () => setShowModal(true)}>
                     Cancel</button> 
 
                 </form>
