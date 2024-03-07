@@ -62,7 +62,12 @@ const LogIn = () => {
             <div className="flex justify-center mt-10">
                 <form onSubmit={handleSubmit}>
                     <div className="hover:scale-110 duration-300">
-                        <label className='p-2 m-1 italic '>Email</label>
+                        <div className="flex flex-col p-2 m-1">
+                            <label className='italic font-bold '>Email</label>
+                            <label className='italic  '>Test email: testuser99@gmail.com</label>
+                        </div>
+ 
+
                         <div>
                             <input className="p-2  bg-transparent border-2 border-gray-300 rounded-md text-xl m-2 mb-4"  
                             type="email" required name="email" placeholder='Enter email address...' autoComplete="current-email"
@@ -71,7 +76,10 @@ const LogIn = () => {
                     </div>
 
                     <div className="hover:scale-110 duration-300">
-                        <label className='p-2 m-1 italic '>Password</label>
+                        <div className="flex flex-col p-2 m-1">
+                            <label className='italic font-bold '>Password</label>
+                            <label className='italic  '>Test password: testuser99</label>
+                        </div>
                         <div>
                             <input className="p-2 bg-transparent border-2 border-gray-300 rounded-md text-xl m-2 mb-4"   
                             type="password" required name="password" placeholder='Enter password...' autoComplete="current-password"

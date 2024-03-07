@@ -70,14 +70,20 @@ const SignUp = () => {
 
     return ( 
         <div className="min-h-screen">
+          {failure &&
+          <div className="my-5 p-2 rounded-lg shadow-red-200 bg-red-200 text-red-900 flex justify-center">
+            {failure ===  'Taken email' ? <p className="flex justify-center">This email is already in use</p> :
+             failure === 'Weak password' ? <p className="flex justify-center">Your password should be atleast 6 characters</p> :
+             failure === 'Other error' ? <p className="flex justify-center">An error has occured. Please try again.</p> : null }
+          </div>}
             <h1 className="flex justify-center text-3xl pt-10">Sign Up</h1>
             <h6 className="flex justify-center pt-4">Already have an account?<p className="translate-x-2 text-blue-500 underline hover:scale-110 
                          duration-300"><Link to={'/login'}>Log in here!</Link></p></h6>
 
-
+            <h6 className="flex justify-center pt-4 text-red-400">Press 'Log In Here!' to use dummy account.</h6>
             <div className="flex justify-center mt-10">
                 <form onSubmit={handleSubmit}>
-                    <label className='p-2 m-1 italic '>Username</label>
+                    <label className='p-2 m-1 italic font-bold '>Username</label>
                     <div>
                         <input className="hover:bg-slate-300 hover:scale-105 
                          duration-300 p-2 bg-transparent border-2 border-gray-300 rounded-md text-xl m-2 mb-4"  
@@ -85,7 +91,7 @@ const SignUp = () => {
                         onChange={(e) => { setNewName(e.target.value)}}></input>
                     </div>
 
-                    <label className='p-2 m-1 italic '>Email</label>
+                    <label className='p-2 m-1 italic font-bold '>Email</label>
                     <div>
                         <input className="hover:bg-slate-300 hover:scale-105 
                          duration-300 p-2 bg-transparent border-2 border-gray-300 rounded-md text-xl m-2 mb-4"  
@@ -93,7 +99,7 @@ const SignUp = () => {
                         onChange={(e) => { setNewEmail(e.target.value)}}></input>
                     </div>
 
-                    <label className='p-2 m-1 italic '>Password</label>
+                    <label className='p-2 m-1 italic font-bold'>Password</label>
                     <div>
                         <input className="hover:bg-slate-300 hover:scale-105 
                          duration-300 p-2 bg-transparent border-2 border-gray-300 rounded-md text-xl m-2"   
@@ -110,9 +116,6 @@ const SignUp = () => {
 
 
 
-            {failure ===  'Taken email' ? <p className="flex justify-center">This email is already in use</p> :
-             failure === 'Weak password' ? <p className="flex justify-center">Your password should be atleast 6 characters</p> :
-             failure === 'Other error' ? <p className="flex justify-center">An error has occured. Please try again.</p> : null }
 
         </div>
      );
