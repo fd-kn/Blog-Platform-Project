@@ -87,7 +87,7 @@ const OwnBlogs = () => {
         };
     
         fetchData();}
-      }, []);
+      });
 
 
       const handlePostClick = (blogID) => {

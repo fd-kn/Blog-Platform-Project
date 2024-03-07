@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import  skytreesun  from "./Images/skytreesun.jpg"
-import deviljin from "./Images/deviljin.jpg"
-import deviljinning from "./Images/deviljinning.jpg"
+import planetrise from "./Images/planetrise.jpg"
 
 // import { auth, db } from "./firebaseconfig";
 // import { doc, getDoc } from "firebase/firestore";
@@ -45,7 +44,7 @@ const Home = () => {
 
         <div className="flex justify-center">
             <img className="h-4/6 w-4/6 rounded-3xl border-red-400 shadow-lg shadow-black border-4 m-5" 
-                src={isSignedIn ? deviljinning : deviljin } alt="Example" />
+                src={isSignedIn ? planetrise : skytreesun } alt="Example" />
         </div>
 
 

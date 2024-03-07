@@ -1,7 +1,7 @@
 import { collection, doc, getDoc, getDocs, query, updateDoc, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db, storage } from "./firebaseconfig";
-import { deleteObject, getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import defaultIcon from './Images/defaulticon.jpg'
 import ConfirmModal from "./ConfirmModal";
 
@@ -260,7 +260,6 @@ const Profile = () => {
                 <p className="pr-2">Email:</p> {email}
             </div>
         </div>
-        //! ANIMATION STUFF? hover:-translate-x-10 duration-300
     );
 };
 

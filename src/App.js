@@ -12,7 +12,6 @@ import OwnBlogs from "./OwnBlogs";
 import BlogTemplate from "./BlogTemplate";
 import EditPost from "./EditPost";
 import Profile from "./Profile";
-// import skytreesun from "./skytreesun.jpg"
 
 function App() {
 

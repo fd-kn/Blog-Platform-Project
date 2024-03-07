@@ -1,13 +1,12 @@
-import { collection, doc, getDoc, getDocs, query, setDoc, updateDoc, where } from "firebase/firestore";
+import { doc, getDoc, updateDoc} from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db, storage } from "./firebaseconfig";
-import { Link } from "react-router-dom";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import ConfirmModal from "./ConfirmModal";
 
 
 
-const EditPost = ({blogId}) => {
+const EditPost = () => {
 
     const [title, setTitle] = useState('')
     const [post, setPost] = useState('')
@@ -69,7 +68,7 @@ const EditPost = ({blogId}) => {
             event.preventDefault();
         }
 
-        var nameofUser = 'N/A'
+        // var nameofUser = 'N/A'
 
         // const now = new Date();
         // const day = now.getDate();
@@ -86,14 +85,14 @@ const EditPost = ({blogId}) => {
 
             console.log('hellooo')
 
-            const docRef = doc(db, "users", userID);
-            const docSnap = await getDoc(docRef);
+            // const docRef = doc(db, "users", userID);
+            // const docSnap = await getDoc(docRef);
     
-            if (docSnap.exists()) {
-                 nameofUser = (docSnap.data().userName);
-            } else {
-                 nameofUser = 'N/A'
-            }
+            // // if (docSnap.exists()) {
+            // //      nameofUser = (docSnap.data().userName);
+            // // } else {
+            // //      nameofUser = 'N/A'
+            // // }
 
             //UPDATING BLOG IN ALLBLOGS COLLECTION IN FIREBASE
               const docBlogRef = doc(db, "allBlogs", blogID);
