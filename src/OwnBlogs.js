@@ -127,6 +127,7 @@ const OwnBlogs = () => {
 
 
               <div className="flex flex-wrap justify-start m-5">
+                  {blogsToMap.length === 0 ? <p>There are currently no blogs!</p> : null}
                   {blogsToMap.map((blog, index) => (
                       <div key={index} onClick={()=>handlePostClick(blog.blogID)} 
                       className=" w-5/6 sm:w-8/12 md:w-5/12 lg:w-4/12 xl:w-3/12 m-5 shadow-md shadow-gray-200 rounded-lg 
@@ -143,8 +144,6 @@ const OwnBlogs = () => {
                                 </div>
                                 }
                               </div>
-                              
-
                           </Link>
                       </div>
                   ))}
