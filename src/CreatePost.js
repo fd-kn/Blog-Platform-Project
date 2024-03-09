@@ -82,21 +82,13 @@ const CreatePost = () => {
         const handleConfirmation = async () => {
             setShowModal(false);
             window.location.replace('/blogs')
-
-            // await handlePost();
         };
 
         const handleCancel = () => {
             setShowModal(false);
-            // window.location.replace('/blogs')
-
           };    
 
         const handleImageUpload = async (file) => {
-            //! Save to new folder in storage - like blog posts - with blog id
-            //! Add the saving of the image once the post has been created
-            //! Just store the url into an image state from here to display it here
-
             try{
                 const storageRef = ref(storage, `tempPostImages/${userID}/${file.name}`);
                 await uploadBytes(storageRef, file);
@@ -104,9 +96,7 @@ const CreatePost = () => {
                 setSelectedImage(downloadURL);
             }catch(error){
                 console.error("Error uploading preview image", error);
-    
             }
-
         }
 
         const noImage = () => {
@@ -129,8 +119,6 @@ const CreatePost = () => {
                         ></input>
                     </div>
 
-                    {/* MAKE TEXTAREA BIGGER */}
-                    {/* <label className="p-2 m-1 italic">Add Image</label> */}
                     <div>
                         <input 
                             type="file"
@@ -187,8 +175,6 @@ const CreatePost = () => {
                     Cancel</button> 
 
                 </form>
-
-
 
             </div>
             </div>

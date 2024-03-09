@@ -2,13 +2,7 @@ import { Link } from "react-router-dom";
 import  skytreesun  from "./Images/skytreesun.jpg"
 import planetrise from "./Images/planetrise.jpg"
 
-// import { auth, db } from "./firebaseconfig";
-// import { doc, getDoc } from "firebase/firestore";
-// import { useEffect, useState } from "react";
-
-
 const Home = () => {
-
     
     var isSignedIn;
     if(JSON.parse(localStorage.getItem('isSignedIn'))){
@@ -16,8 +10,6 @@ const Home = () => {
     } else{
         isSignedIn = false;
     }
-
-
 
     return ( 
         <div className="min-h-screen">
@@ -39,8 +31,6 @@ const Home = () => {
                  rounded-3xl bg-blue-200 hover:bg-blue-400 
                  hover:scale-110 duration-300"><Link to='/createpost'>Start writing!</Link></button>}
             </div>
-        {/* {userID ? <p>{user.email}</p> : null} */}
-        {/* <p>{userName}</p> */}
 
         <div className="flex justify-center">
             <img className="h-4/6 w-4/6 rounded-3xl border-red-400 shadow-lg shadow-black border-4 m-5" 

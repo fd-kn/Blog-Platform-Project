@@ -6,6 +6,7 @@ import defaultIcon from './Images/defaulticon.jpg'
 import ConfirmModal from "./ConfirmModal";
 
 const Profile = () => {
+
     const [selectedImage, setSelectedImage] = useState(null);
     const [userName, setUserName] = useState('');
     const [editingUsername, setEditingUsername] = useState(false);
@@ -15,8 +16,6 @@ const Profile = () => {
     const [ogImage, setOgImage] = useState(null)
     const [email, setEmail] = useState('')
     const [showModal, setShowModal] = useState(false);
-
-
 
     var userID;
 
@@ -109,14 +108,11 @@ const Profile = () => {
             });
 
             setEditingUsername(false);
-            // window.location.reload();
-
 
         } catch (error) {
             console.error("Error updating username:", error);
         }
     };
-
 
     const handleCancelEdit = () => {
         setEditingUsername(false);
@@ -143,8 +139,6 @@ const Profile = () => {
 
     const deleteImage = async () => {
         try {
-        //   const storageRef = ref(storage, `profileImages/${userID}`);
-        //   await deleteObject(storageRef);
     
           // Update the user's document in Firestore to remove the profileImage field
           const docRef = doc(db, "users", userID);
@@ -206,24 +200,23 @@ const Profile = () => {
                     onCancel={handleCancel}
               />
 
-
                 {imageChange && (
-                            <div className="flex justify-center fixed inset-0 z-50 items-center overflow-auto bg-black bg-opacity-50">
-                                <div className="border-2 border-black bg-white p-4 rounded-lg">
-                                    <div className="flex justify-center m-4">
-                                        <img className="h-52 w-52 rounded-full border-4 border-black" src={selectedImage} alt="new profile" />
-                                    </div>
-                                    <button className='mx-6 p-2 rounded-lg bg-blue-200  hover:bg-blue-400 hover:scale-110 duration-300' 
-                                        onClick={imageSave}>Save Image
-                                    </button>
-
-                                    <button className='mx-6 p-2 rounded-lg bg-blue-200  hover:bg-blue-400 hover:scale-110 duration-300' 
-                                        onClick={cancelSave}>Cancel
-                                    </button>
-
-                                </div>
+                    <div className="flex justify-center fixed inset-0 z-50 items-center overflow-auto bg-black bg-opacity-50">
+                        <div className="border-2 border-black bg-white p-4 rounded-lg">
+                            <div className="flex justify-center m-4">
+                                <img className="h-52 w-52 rounded-full border-4 border-black" src={selectedImage} alt="new profile" />
                             </div>
-                        )}
+                            <button className='mx-6 p-2 rounded-lg bg-blue-200  hover:bg-blue-400 hover:scale-110 duration-300' 
+                                onClick={imageSave}>Save Image
+                            </button>
+
+                            <button className='mx-6 p-2 rounded-lg bg-blue-200  hover:bg-blue-400 hover:scale-110 duration-300' 
+                                onClick={cancelSave}>Cancel
+                            </button>
+
+                        </div>
+                    </div>
+                )}
             </div>
 
 

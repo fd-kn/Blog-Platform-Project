@@ -1,3 +1,5 @@
+//! MAYBE FOR THE NEXT PROJECT :)
+
 // Sort by time rather than date
 // Layout of blogs (eg. no. of blogs on one line, sizes etc.)
 // Add publish function

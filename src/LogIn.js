@@ -21,12 +21,6 @@ const LogIn = () => {
             localStorage.setItem('isSignedIn', JSON.stringify(true));
             localStorage.setItem('userID', JSON.stringify(user.uid))
             console.log(user.email)
-
-            //! Get user id and add to database. Add username to name variable and then 
-            //! add to database. Then let user add blog post/story.
-            //! Maybe remove blog posts for now and keep it as a story site instead.
-            //! Add profile picture and pop up messages whenever user logs in or out.
-
             
         })
         .catch((error) => {
@@ -51,7 +45,6 @@ const LogIn = () => {
               }
         });
     }
-
 
 
     return ( 

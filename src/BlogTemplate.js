@@ -19,7 +19,6 @@ const BlogTemplate = ({isPublic}) => {
     var blogID;
     if(JSON.parse(localStorage.getItem('blogID'))){
         blogID = JSON.parse(localStorage.getItem('blogID'));
-        // console.log(isPublic)
     } else{
         blogID = '';
     }
@@ -58,7 +57,6 @@ const BlogTemplate = ({isPublic}) => {
 
                       };
                     setBlogpost(blogDetails);
-                    // setIsLoaded(true);
             } else{
               console.log("No blog found with the specified blogID");
 
@@ -75,9 +73,7 @@ const BlogTemplate = ({isPublic}) => {
 
 
       const deleteBlog = async (blogID) => {
-        await deleteDoc(doc(db, "allBlogs", blogID));
-        // await deleteDoc(doc(db, "publicBlogs", blogID));
-        
+        await deleteDoc(doc(db, "allBlogs", blogID));        
         window.location.replace('/ownblogs')
 
       }
@@ -122,7 +118,6 @@ const BlogTemplate = ({isPublic}) => {
               blogImage: blogpost.blogImage
           });
 
-          //! UPDATE PUBLIC BLOGS WITH THIS INFO 
 
           setNotification('Blog published successfully');
 
@@ -216,10 +211,8 @@ const BlogTemplate = ({isPublic}) => {
                   <button className="py-2 px-5 m-2 text-l
                   rounded-xl bg-blue-200 hover:bg-blue-400 translate-y-1 
                   hover:scale-110 duration-300"><Link to='/blogs'><img className="h-6 w-6" src={backArrow} alt="arrow" /></Link></button>
-              //! ADD HISTORY BACK TO ALL THESE BACK
             }
 
- {/* flex justify-center p-5 text-5xl */}
             {blogpost && (
               <div className="mx-auto p-5">
                 <h1 className="text-5xl break-words text-center">{blogpost.title}</h1>
@@ -268,11 +261,6 @@ const BlogTemplate = ({isPublic}) => {
                 onConfirm={() => handleConfirmation(action, storeId)}
                 onCancel={handleCancel}
               />
-        
-
-
-
-
         </div>
      );
 }

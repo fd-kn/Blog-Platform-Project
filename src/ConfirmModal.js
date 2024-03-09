@@ -14,13 +14,6 @@ const ConfirmModal = ({ isOpen, message, onConfirm, onCancel }) => {
   };
 
   return (
-                //   {/* <div className=" fixed inset-0 z-50 flex items-center justify-center overflow-auto bg-black bg-opacity-50">
-                //     <div className="border-2 border-black bg-blue-200 w-1/2 p-4 rounded-lg">
-                //       <p>Are you sure you want to publish this blog?</p>
-                //       <button>Yes</button>
-                //       <button>No</button>
-                //     </div>
-                //   </div> */}
 
     <div className="fixed inset-0 z-50 flex items-center justify-center overflow-auto bg-black bg-opacity-50">
       <div className="border-2 border-black bg-white p-4 rounded-lg">

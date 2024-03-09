@@ -3,8 +3,6 @@ import Home from "./Home";
 import Navbar from "./Navbar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NoPage from "./NoPage";
-// import Stories from "./Stories";
-// import Settings from "./Settings";
 import LogIn from "./LogIn";
 import SignUp from "./SignUp";
 import CreatePost from "./CreatePost";
@@ -25,37 +23,33 @@ function App() {
  
 
   return (
-    // <div className="bg-gradient-to-br from-purple-400 via-red-200 to-blue-300">
-    <div className="">
 
-    <BrowserRouter>
-    <div >
-    <Navbar />
-      <Routes>
-        <Route>
-          <Route path="/" element={<Home />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/blogs" element={<Blogs />} />
-          {/* <Route path="/stories" element={<Stories />} /> */}
-          {/* <Route path="/settings" element={<Settings />} /> */}
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/login" element={<LogIn />} />
-          {(isSignedIn) ? <Route path="/profile" element={<Profile />} /> : null}
-          {(isSignedIn) ? <Route path="/editpost" element={<EditPost />} /> : null}
-          {(isSignedIn) ? <Route path="/ownblogs" element={<OwnBlogs />} /> : null}
-          <Route path="/blogtemplate/Published" element={<BlogTemplate isPublic={'Published'} />} />
-          {(isSignedIn) ? <Route path="/blogtemplate/NotPublished" element={<BlogTemplate isPublic={'NotPublished'}/>} />: null}
+      <BrowserRouter>
 
+        <Navbar />
+        <Routes>
 
-          <Route path="*" element={<NoPage />} />
-          {(isSignedIn) ? <Route path="/createpost" element = {<CreatePost />} /> : null}
-        </Route>
-      </Routes>
-      </div>
-    </BrowserRouter>
-    
-    </div>
-  );
+          <Route>
+              <Route path="/" element={<Home />} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/blogs" element={<Blogs />} />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/login" element={<LogIn />} />
+              <Route path="/blogtemplate/Published" element={<BlogTemplate isPublic={'Published'} />} />
+              <Route path="*" element={<NoPage />} />
+              
+              {/* THESE PAGES ARE ONLY VISIBLE IS USER IS SIGNED IN */}
+              {(isSignedIn) ? <Route path="/profile" element={<Profile />} /> : null}
+              {(isSignedIn) ? <Route path="/editpost" element={<EditPost />} /> : null}
+              {(isSignedIn) ? <Route path="/ownblogs" element={<OwnBlogs />} /> : null}
+              {(isSignedIn) ? <Route path="/blogtemplate/NotPublished" element={<BlogTemplate isPublic={'NotPublished'}/>} />: null}
+              {(isSignedIn) ? <Route path="/createpost" element = {<CreatePost />} /> : null}
+          </Route>
+
+        </Routes>
+
+      </BrowserRouter>
+      );
 }
 
 export default App;

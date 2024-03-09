@@ -8,9 +8,8 @@ import defaultIcon from './Images/defaulticon.jpg'
 
 
 const Navbar = () => {
-    const location = useLocation();
 
-    // const [userName, setUserName] = useState()
+    const location = useLocation();
     const [showModal, setShowModal] = useState(false);
     const [image, setImage] = useState();
     const [mobileNav, setMobileNav] = useState(false);
@@ -32,7 +31,6 @@ const Navbar = () => {
             
     
             if (docSnap.exists()) {
-              // setUserName(docSnap.data().userName);
               if(docSnap.data().profileImage){
                 setImage(docSnap.data().profileImage);
             } else {
@@ -40,11 +38,9 @@ const Navbar = () => {
             }
             } else {
               console.log("No such document!");
-              // setUserName('');
             }
           } catch (error) {
             console.error("Error fetching data:", error);
-            console.error('User???')
           }
         };
     
@@ -103,7 +99,6 @@ const Navbar = () => {
           <div className="flex justify-between">
               <h1 className="text-center flex-grow p-4 text-3xl hover:scale-110 duration-300 "><Link to="/home">The Writer's Block</Link></h1>
               <button onClick={mobileNavbar} className="sm:hidden p-4 text-3xl hover:scale-110 duration-300">{mobileNav ? 'x' : '=' }</button>
-              {/* //!Put an onclick here so that when the state is changed, new navbar will appear, like the modal */}
           </div>
 
           {/* MOBILE NAVBAR */}
@@ -127,11 +122,8 @@ const Navbar = () => {
 
           }
 
-
-
           {/* WEB NAVBAR */}
                 <ul className="p-4 sm:flex hidden">
-                {/* <div className="pt-2">  */}
                 <li className={`pl-12 hover:scale-110 duration-300 ${location.pathname === '/home' || location.pathname === '/' ? 'underline' : 'no-underline'}`}><Link to="/home">Home</Link></li>
                 <li className={`pl-12 hover:scale-110 duration-300 ${location.pathname === '/blogs' ? 'underline' : 'no-underline'}`}><Link to="/blogs">Blogs</Link></li>
 

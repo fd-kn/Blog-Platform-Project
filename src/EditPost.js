@@ -68,31 +68,7 @@ const EditPost = () => {
             event.preventDefault();
         }
 
-        // var nameofUser = 'N/A'
-
-        // const now = new Date();
-        // const day = now.getDate();
-        // const month = now.getMonth() + 1;
-        // const year = now.getFullYear();
-        // const hours = now.getHours();
-        // const minutes = now.getMinutes();
-        // const seconds = now.getSeconds()
-
-        // const fDate = `${day}/${month}/${year}`;
-        // const fTime = `${hours}:${minutes}:${seconds}`;
-
         try {    
-
-            console.log('hellooo')
-
-            // const docRef = doc(db, "users", userID);
-            // const docSnap = await getDoc(docRef);
-    
-            // // if (docSnap.exists()) {
-            // //      nameofUser = (docSnap.data().userName);
-            // // } else {
-            // //      nameofUser = 'N/A'
-            // // }
 
             //UPDATING BLOG IN ALLBLOGS COLLECTION IN FIREBASE
               const docBlogRef = doc(db, "allBlogs", blogID);
@@ -125,9 +101,6 @@ const EditPost = () => {
         }}
     
         const handleImageUpload = async (file) => {
-            //! Save to new folder in storage - like blog posts - with blog id
-            //! Add the saving of the image once the post has been created
-            //! Just store the url into an image state from here to display it here
 
             try{
                 const storageRef = ref(storage, `tempPostImages/${userID}/${file.name}`);
@@ -179,22 +152,21 @@ const EditPost = () => {
                     )}
                     
                     <div>
-                                <input 
-                                    type="file"
-                                    accept="image/*"
-                                    onChange={(e) => handleImageUpload(e.target.files[0])}
-                                    id="imageInput"
-                                    className="absolute opacity-0 w-0 h-0 overflow-hidden"
-                                    // required
-                                    
-                                />
-                                <label htmlFor="imageInput" 
-                                    title="Please select an image"
-                                    className="hover:scale-110 duration-300 cursor-pointer
-                                    bg-blue-200 hover:bg-blue-400 p-2 rounded-lg">
-                                    Change Image
-                                </label>
-                            </div>
+                        <input 
+                            type="file"
+                            accept="image/*"
+                            onChange={(e) => handleImageUpload(e.target.files[0])}
+                            id="imageInput"
+                            className="absolute opacity-0 w-0 h-0 overflow-hidden"
+                            
+                        />
+                        <label htmlFor="imageInput" 
+                            title="Please select an image"
+                            className="hover:scale-110 duration-300 cursor-pointer
+                            bg-blue-200 hover:bg-blue-400 p-2 rounded-lg">
+                            Change Image
+                        </label>
+                    </div>
 
 
 

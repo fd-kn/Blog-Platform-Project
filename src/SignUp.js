@@ -14,8 +14,6 @@ const SignUp = () => {
     const [failure, setFailure] = useState('')
 
     const handleSubmit = (event) => {
-
-      //!Check database if username already exists
         
         event.preventDefault();
         console.log('hello')
@@ -31,13 +29,10 @@ const SignUp = () => {
                   userName: newName,
                   email: newEmail,
                   profileImage: ''
-                  //ADD PROFILE IMAGE STUFF HERE
                 });
               
-                // Data added successfully
                 console.log("Data added to Firestore successfully");
               } catch (error) {
-                // Handle Firestore error
                 console.error("Error adding data to Firestore:", error);
               }
             
@@ -113,10 +108,6 @@ const SignUp = () => {
                     </div>
                 </form>                
             </div>
-
-
-
-
         </div>
      );
      

@@ -13,6 +13,8 @@ const OwnBlogs = () => {
     const [draftBlogs, setDraftBlogs] = useState([]);
     const [publishedBlogs, setPublishedBlogs] = useState([])
 
+  // CHECKS IF USER IS VIEWING THEIR DRAFTS SECTION OR PUBLISHED SECTION OF THEIR BLOGS
+
     useEffect(() => {
       const draftStorage = JSON.parse(localStorage.getItem('draftStorage'));
       if (draftStorage !== null) {
@@ -27,7 +29,6 @@ const OwnBlogs = () => {
         userID = '';
     }
 
-  
 
     useEffect(() => {
         if(userID !== ''){
@@ -57,8 +58,7 @@ const OwnBlogs = () => {
 
 
                     newBlogs.sort((a, b) => {
-                      // console.log(a.date)
-                      // console.log(a.time)
+  
                       const [dayA, monthA, yearA] = a.date.split('/');
                       const [hourA, minuteA, secondA] = a.time.split(':');
                     
@@ -69,7 +69,6 @@ const OwnBlogs = () => {
                       const dateTimeA = new Date(yearA, monthA - 1, dayA, hourA, minuteA, secondA);
                       const dateTimeB = new Date(yearB, monthB - 1, dayB, hourB, minuteB, secondB);
 
-                      //  console.log(dateTimeA)
                       return dateTimeB - dateTimeA;
                     });
             
@@ -77,8 +76,6 @@ const OwnBlogs = () => {
                       setDraftBlogs(newBlogs.filter(blog => blog.isPublished === false));
                       setPublishedBlogs(newBlogs.filter(blog => blog.isPublished === true));
 
-
-                      // console.log(newBlogs);
             })
 
           } catch (error) {
@@ -93,6 +90,8 @@ const OwnBlogs = () => {
       const handlePostClick = (blogID) => {
         localStorage.setItem('blogID', JSON.stringify(blogID));
       }
+
+      // SEPERATES THE BLOGS IN TWO SECTIONS - ONE FOR DRAFTS AND ONE FOR PUBLISHED BLOGS
 
       const handleSplit = (draft) => {
         if(draft === 'Draft'){
@@ -111,6 +110,7 @@ const OwnBlogs = () => {
 
 
     return ( 
+
         <div className="min-h-screen p-5">
 
           <div className="flex justify-between pt-10 ">
@@ -119,8 +119,6 @@ const OwnBlogs = () => {
               </button>
               <h1 className="text-4xl -translate-x-10 flex-grow text-center italic">My Blogs</h1>
           </div>
-
-
 
           <div className="flex justify-start m-5 text-xl italic"> 
             <button className={`p-2 m-2 hover:scale-110 duration-300 ${isDraft && 'underline'}`} onClick={() => handleSplit('Draft')} >Drafts</button>

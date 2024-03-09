@@ -10,7 +10,7 @@ const Blogs = () => {
     const [allblogs, setAllblogs] = useState([])
     const [isLoaded, setIsLoaded] = useState(false)
 
-
+    // CHECKS IF USER IS SIGNED IN
     var isSignedIn;
     if(JSON.parse(localStorage.getItem('isSignedIn'))){
         isSignedIn = JSON.parse(localStorage.getItem('isSignedIn'));
@@ -18,6 +18,7 @@ const Blogs = () => {
         isSignedIn = false;
     }
 
+    // EXTRACTS DETAILS OF ALL PUBLIC BLOGS FROM THE DATABASE
 
     useEffect(() => {
         const fetchData = async () => {
@@ -27,8 +28,6 @@ const Blogs = () => {
             .then((querySnapshot) => {
                 const newBlogs = [];
                 querySnapshot.forEach((doc) => {
-                    // console.log('hello')
-                    // console.log(doc.data().userName)
                     const blogDetails = {
                         title: doc.data().title,
                         post: doc.data().post,
@@ -42,7 +41,7 @@ const Blogs = () => {
                     newBlogs.push(blogDetails);
                     });
 
-
+                    // SORTS THE BLOGS FROM NEWEST TO OLDEST 
 
                     newBlogs.sort((a, b) => {
                         const [dayA, monthA, yearA] = a.date.split('/');
