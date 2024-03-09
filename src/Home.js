@@ -18,10 +18,8 @@ const Home = () => {
             </div>
             <div className='text-center mx-auto w-1/2'>
                 <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                    Odio quidem facere libero ex quis eveniet ipsam unde, 
-                    dignissimos esse debitis perspiciatis quaerat consequatur excepturi 
-                    obcaecati sint expedita eligendi facilis voluptates!
+                    Begin your blogging adventure and dive into a world of captivating content from fellow writers. 
+                    While still a work in progress, this platform offers the essential tools you need to start blogging.
                 </p>
                 {(!isSignedIn) ? <button className="py-4 px-10 m-10 text-2xl
                  rounded-3xl bg-blue-200 hover:bg-blue-400 
